@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Products() {
+    const navigate = useNavigate();
   const products = [
     {
       category: "Clothing & Textiles",
@@ -34,6 +36,11 @@ function Products() {
         "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
     },
   ];
+
+   const handleCardClick = (category) => {
+        const encodedCategory = encodeURIComponent(category);
+        navigate(`/product/${encodedCategory}`);
+    };
 
   return (
     <>
@@ -177,7 +184,7 @@ function Products() {
 
           <div className="products-grid">
             {products.map((product, index) => (
-              <div className="product-card" key={index}>
+              <div className="product-card" key={index} onClick={() => handleCardClick(product.category)}>
                 <div className="product-image">
                   <img src={product.imageUrl} alt={product.category} />
                 </div>

@@ -5,8 +5,12 @@ function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Check active link
+    // Check active link - products page or any product subpage
     const isActive = (path) => {
+        if (path === '/products') {
+            // For products, check if current path starts with /products
+            return location.pathname.startsWith('/products') || location.pathname.startsWith('/product/');
+        }
         return location.pathname === path;
     };
 
@@ -188,7 +192,7 @@ function Navbar() {
                             </li>
                             <li>
                                 <Link 
-                                    to="/products" 
+                                    to="/product/:category" 
                                     className={isActive('/products') ? 'active' : ''}
                                 >
                                     Products
@@ -200,14 +204,6 @@ function Navbar() {
                                     className={isActive('/about') ? 'active' : ''}
                                 >
                                     About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link 
-                                    to="/contact" 
-                                    className={isActive('/contact') ? 'active' : ''}
-                                >
-                                    Contact
                                 </Link>
                             </li>
                         </ul>

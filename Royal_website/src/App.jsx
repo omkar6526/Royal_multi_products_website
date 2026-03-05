@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./component/Header";
 import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
+import ProductPage from "./pages/ProductPage";
 
 
 
@@ -16,10 +18,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+             <Route path="/product/:category" element={<ProductPage />} />
 
           </Routes>
         </main>
-      </div>
+        <Footer/>
+      </div> 
     </Router>
   );
 }
