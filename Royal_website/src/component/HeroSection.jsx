@@ -14,7 +14,6 @@ function HeroSection() {
         text-align:center;
         color:white;
         padding:60px 20px;
-        margin-bottom: 20px;
       }
 
       .hero-container{
