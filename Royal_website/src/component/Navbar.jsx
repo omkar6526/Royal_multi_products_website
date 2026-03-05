@@ -1,9 +1,9 @@
 import React from "react";
 
 function Navbar() {
-  return (
-    <>
-      <style>{`
+    return (
+        <>
+            <style>{`
 
       .navbar{
         background:#f5f5f5;
@@ -31,15 +31,30 @@ function Navbar() {
         color:#d4a531;
       }
 
+      .right-menu{
+        display:flex;
+        align-items:center;
+        gap:20px;
+      }
+
       .menu{
         list-style:none;
         display:flex;
-        gap:30px;
-        font-weight:500;
+        gap:20px;
       }
 
-      .menu li{
+      .menu li button{
+        background:transparent;
+        border:none;
+        font-weight:500;
         cursor:pointer;
+        font-size:16px;
+        padding:8px 12px;
+        transition:0.3s;
+      }
+
+      .menu li button:hover{
+        color:#d4a531;
       }
 
       .inquiry-btn{
@@ -54,28 +69,32 @@ function Navbar() {
 
       `}</style>
 
-      <nav className="navbar">
-        <div className="container nav-content">
+            <nav className="navbar">
+                <div className="container nav-content">
+                    <div className="logo">
+                        <h2>Royal</h2>
+                        <p>EXPORT QUALITY</p>
+                    </div>
 
-          <div className="logo">
-            <h2>GlobalTrade</h2>
-            <p>EXPORT QUALITY</p>
-          </div>
+                    <div className="right-menu">
+                        <ul className="menu">
+                            <li>
+                                <button>Home</button>
+                            </li>
+                            <li>
+                                <button>Products</button>
+                            </li>
+                            <li>
+                                <button>About Us</button>
+                            </li>
+                        </ul>
 
-          <ul className="menu">
-            <li>Home</li>
-            <li>Products</li>
-            <li>About Us</li>
-          </ul>
-
-          <button className="inquiry-btn">
-            Get Inquiry
-          </button>
-
-        </div>
-      </nav>
-    </>
-  );
+                        <button className="inquiry-btn">Get Inquiry</button>
+                    </div>
+                </div>
+            </nav>
+        </>
+    );
 }
 
 export default Navbar;

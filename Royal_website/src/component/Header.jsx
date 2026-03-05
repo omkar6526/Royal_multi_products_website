@@ -1,10 +1,12 @@
+import { FaPhoneAlt } from "react-icons/fa";
+import { BiFontSize, BiLogoGmail } from "react-icons/bi";
 
 function Header() {
   return (
     <>
       <style>{`
       .topbar{
-        background:#0d5c3d;
+        background:#7E2A0C;
         color:white;
         font-size:14px;
         padding:8px 0;
@@ -21,7 +23,16 @@ function Header() {
         align-items:center;
       }
 
+      .left{
+        display:flex;
+        align-items:center;
+        gap:20px;
+      }
+
       .left span{
+        display:flex;
+        align-items:center;
+        gap:6px;
         margin-right:20px;
       }
 
@@ -30,8 +41,15 @@ function Header() {
       <div className="topbar">
         <div className="container topbar-content">
           <div className="left">
-            <span>+1 (234) 567-890</span>
-            <span>info@company.com</span>
+            <span>
+              <FaPhoneAlt size={15} />
+              +91 9623358693
+            </span>
+
+            <span>
+              <BiLogoGmail size={20} />
+              royal.shaikh231@gmail.com
+            </span>
           </div>
 
           <div className="right">
