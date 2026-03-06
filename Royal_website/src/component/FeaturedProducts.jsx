@@ -1,55 +1,13 @@
 // FeaturedProducts.jsx
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { getFeaturedProducts } from "../data/productData";
 
 function FeaturedProducts() {
   const navigate = useNavigate();
   const sectionRef = useRef(null);
-
-  const featuredItems = [
-    {
-      category: "CLOTHING & TEXTILES",
-      title: "Premium School Uniforms",
-      description: "High-quality, durable school uniforms in various sizes",
-      imageUrl: "https://image.made-in-china.com/203f0j00KAlouVCwLacp/blog.jpg",
-      bgColor: "#f5e6d3"
-    },
-    {
-      category: "CLOTHING & TEXTILES", 
-      title: "Medical Hospital Aprons",
-      description: "Sterile, comfortable aprons for medical professionals",
-      imageUrl: "https://thumbs.dreamstime.com/b/closeup-green-surgical-smock-stethoscope-white-hanger-against-neutral-grey-background-medical-uniform-nurse-doctor-384820455.jpg",
-      bgColor: "#e0f0fa"
-    },
-    {
-      category: "CLOTHING & TEXTILES",
-      title: "Luxury Cotton Towels",
-      description: "Soft, absorbent premium towels for hotels and homes",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5GB3-grc9de-jeCVFpDOCkvoLStXg7A2lg&s",
-      bgColor: "#e8f0e8"
-    },
-    {
-      category: "CLOTHING & TEXTILES",
-      title: "Hajj Ihram Set",
-      description: "Authentic white ihram clothing for pilgrimage",
-      imageUrl: "https://www.hadiyahgifting.com/cdn/shop/files/Hajj-e-Mabroor_Luxe_Couple_Set-Photoroom.webp?v=1746469481",
-      bgColor: "#f5e6d3"
-    },
-    {
-      category: "CLOTHING & TEXTILES", 
-      title: "Premium Hijab Collection",
-      description: "Elegant hijabs in various styles and fabrics",
-      imageUrl: "https://img.nihaojewelry.com/fit-in/800x800/filters:format(webp)/product/2025/7/29/1950012980083167232/121-Colors-Pure-Color-Pearl-Chiffon-Long-Scarf-Premium-Straight-Edge-Ruffle-Chiffon-Shawl-Single-Color-Indonesian-Headscarf.jpg",
-      bgColor: "#e0f0fa"
-    },
-    {
-      category: "Soaps",
-      title: "Natural Handmade Soap Bars",
-      description: "Organic handcrafted soap with natural ingredients",
-      imageUrl: "https://media.istockphoto.com/id/517495506/photo/bars-of-homemade-soaps-honey-or-oil-and-healing-herbs.jpg?s=612x612&w=0&k=20&c=bQPtsclGfpY5yIjyRDSSSRn4wAy94O1DFsQr2aoz0K4=",
-      bgColor: "#e8f0e8"
-    }
-  ];
+  
+  const featuredItems = getFeaturedProducts();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,6 +26,11 @@ function FeaturedProducts() {
 
     return () => observer.disconnect();
   }, []);
+
+  // Helper function to create slug from title
+  const createSlug = (title) => {
+    return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+  };
 
   return (
     <>
@@ -88,6 +51,11 @@ function FeaturedProducts() {
           height: 200%;
           background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
           animation: rotate 40s linear infinite;
+        }
+
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         .container {
@@ -408,6 +376,17 @@ function FeaturedProducts() {
           100% { transform: translateY(0px); }
         }
 
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         @media (max-width: 968px) {
           .featured-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -439,10 +418,10 @@ function FeaturedProducts() {
           </div>
 
           <div className="featured-grid">
-            {featuredItems.map((item, index) => (
-              <div className="featured-card" key={index}>
+            {featuredItems.map((item) => (
+              <div className="featured-card" key={item.id}>
                 <div className="card-image">
-                  <img src={item.imageUrl} alt={item.title} />
+                  <img src={item.image} alt={item.title} />
                   <div className="featured-tag">Featured</div>
                 </div>
 
@@ -454,7 +433,7 @@ function FeaturedProducts() {
                   <div className="card-buttons">
                     <button 
                       className="details-btn"
-                      onClick={() => navigate(`/product/${item.title.toLowerCase().replace(/ /g, '-')}`)}
+                      onClick={() => navigate(`/product/details/${item.id}`)}
                     >
                       View Details
                     </button>

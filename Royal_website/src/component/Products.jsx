@@ -1,46 +1,58 @@
 // Products.jsx
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { categories, products } from "../data/productData";
 
 function Products() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   
-  const products = [
+  // Transform categories data for display
+  const productCategories = [
     {
       category: "Clothing & Textiles",
       items: "School Uniforms, Hospital Aprons, Towels, Hajj Ihram, Hijab",
-      imageUrl: "https://image.made-in-china.com/203f0j00KAlouVCwLacp/blog.jpg",
-      icon: "👔"
+      imageUrl: products.find(p => p.category === "Clothing & Textiles")?.image || "https://image.made-in-china.com/203f0j00KAlouVCwLacp/blog.jpg",
+      slug: "clothing-textiles"
     },
     {
       category: "Soaps",
       items: "Natural handmade soaps, organic bath soaps, premium soap products",
-      imageUrl: "https://media.istockphoto.com/id/517495506/photo/bars-of-homemade-soaps-honey-or-oil-and-healing-herbs.jpg?s=612x612&w=0&k=20&c=bQPtsclGfpY5yIjyRDSSSRn4wAy94O1DFsQr2aoz0K4=",
-      icon: "🧼"
+      imageUrl: products.find(p => p.category === "Soaps")?.image || "https://media.istockphoto.com/id/517495506/photo/bars-of-homemade-soaps-honey-or-oil-and-healing-herbs.jpg?s=612x612&w=0&k=20&c=bQPtsclGfpY5yIjyRDSSSRn4wAy94O1DFsQr2aoz0K4=",
+      slug: "soaps"
     },
     {
       category: "Spices",
       items: "Premium food spices including onion powder and spice collections",
-      imageUrl: "https://deliciousfoods.in/cdn/shop/articles/spices.jpg?v=1742457010",
-      icon: "🌶️"
+      imageUrl: products.find(p => p.category === "Spices")?.image || "https://deliciousfoods.in/cdn/shop/articles/spices.jpg?v=1742457010",
+      slug: "spices"
     },
     {
       category: "Grapes",
       items: "Fresh export-quality green and red grapes",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s",
-      icon: "🍇"
+      imageUrl: products.find(p => p.category === "Grapes")?.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s",
+      slug: "grapes"
     },
     {
       category: "Religious Items",
       items: "Prayer beads (Tasbih), Ihram belts, and religious accessories",
-      imageUrl: "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
-      icon: "📿"
+      imageUrl: products.find(p => p.category === "Religious Items")?.image || "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
+      slug: "religious-items"
     },
   ];
 
   const handleCardClick = (category) => {
-    const encodedCategory = encodeURIComponent(category);
-    navigate(`/product/${encodedCategory}`);
+    // Find category slug from categories data
+    const categoryObj = categories.find(c => c.name === category);
+    
+    // Use slug if available, otherwise create a URL-friendly version of category name
+    const categoryParam = categoryObj?.slug || 
+      category.toLowerCase()
+        .replace(/ & /g, '-')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '');
+    
+    // Navigate to the product category page with the parameter
+    navigate(`/product/${categoryParam}`);
   };
 
   useEffect(() => {
@@ -308,30 +320,6 @@ function Products() {
           transform: translateX(5px);
         }
 
-        /* Category Icons */
-        .category-icon {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-          width: 40px;
-          height: 40px;
-          background: rgba(212, 175, 55, 0.1);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 20px;
-          z-index: 2;
-          backdrop-filter: blur(5px);
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          transition: all 0.3s;
-        }
-
-        .product-card:hover .category-icon {
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
-          transform: rotate(360deg);
-          color: white;
-        }
 
         /* Staggered Animation Delays */
         .product-card:nth-child(1) { animation-delay: 0.1s; }
@@ -388,20 +376,19 @@ function Products() {
           </div>
 
           <div className="products-grid">
-            {products.map((product, index) => (
+            {productCategories.map((category, index) => (
               <div 
                 className="product-card" 
                 key={index} 
-                onClick={() => handleCardClick(product.category)}
+                onClick={() => handleCardClick(category.category)}
               >
                 <div className="product-image">
-                  <img src={product.imageUrl} alt={product.category} />
-                  <div className="category-icon">{product.icon}</div>
+                  <img src={category.imageUrl} alt={category.category} />
                 </div>
 
                 <div className="product-content">
-                  <h3>{product.category}</h3>
-                  <p>{product.items}</p>
+                  <h3>{category.category}</h3>
+                  <p>{category.items}</p>
                   <button className="view-link">
                     View Products <span className="arrow">→</span>
                   </button>

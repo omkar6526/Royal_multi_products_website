@@ -257,7 +257,7 @@ function HeroSection() {
           </p>
 
           <div className="hero-buttons">
-            <button className="browse-btn" onClick={() => navigate('/products')}>
+            <button className="browse-btn" onClick={() => navigate('/product/:category')}>
               Browse Products →
             </button>
 

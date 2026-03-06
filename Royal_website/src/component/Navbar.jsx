@@ -262,7 +262,7 @@ function Navbar() {
                             </li>
                             <li className="animate-fade-in-down delay-2">
                                 <Link 
-                                    to="/products"  // Fixed: Changed from "/product/:category" to "/products"
+                                    to="/product/:category"  // Fixed: Changed from "/product/:category" to "/products"
                                     className={isActive('/products') ? 'active' : ''}
                                 >
                                     Products

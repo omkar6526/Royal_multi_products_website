@@ -289,7 +289,6 @@ function Footer() {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            {/* Brand Section */}
             <div className="brand-section">
               <h2>Royal</h2>
               <p>
@@ -309,7 +308,6 @@ function Footer() {
               </div>
             </div>
 
-            {/* Quick Links */}
             <div className="footer-section">
               <h3>Quick Links</h3>
               <ul className="footer-links">
@@ -320,7 +318,6 @@ function Footer() {
               </ul>
             </div>
 
-            {/* Categories */}
             <div className="footer-section">
               <h3>Our Categories</h3>
               <ul className="footer-links">
@@ -332,7 +329,6 @@ function Footer() {
               </ul>
             </div>
 
-            {/* Contact Info */}
             <div className="footer-section">
               <h3>Contact Us</h3>
               <ul className="contact-info">
@@ -352,13 +348,11 @@ function Footer() {
             </div>
           </div>
 
-          {/* Copyright */}
           <div className="copyright">
-            © {new Date().getFullYear()} Royal. All rights reserved. | Crafted with ❤️ for excellence
+            © {new Date().getFullYear()} Royal. All rights reserved. | Crafted with  for excellence
           </div>
         </div>
 
-        {/* Back to Top Button */}
         <button className="back-to-top" onClick={scrollToTop}>
           <FaArrowUp />
         </button>

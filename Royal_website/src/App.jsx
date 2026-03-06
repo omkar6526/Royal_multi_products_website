@@ -9,6 +9,7 @@ import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import ProductPage from "./pages/ProductPage";
 import About from './pages/About';
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/products" element={<Products />} /> {/* Add this route */}
+            <Route path="/products" element={<Products />} /> 
             <Route path="/product/:category" element={<ProductPage />} />
+            <Route path="/product/details/:id" element={<ProductDetails />} />
             <Route path="/contact" element={<InquiryPage />} />
             <Route path="/inquiry" element={<InquiryPage />} />
             <Route path="/about" element={<About />} />

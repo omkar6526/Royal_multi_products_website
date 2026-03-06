@@ -105,7 +105,7 @@ function About() {
       <div className="about-hero">
         <div className="container">
           <h1>Experience the <span className="gold-text">Royal</span> Standard</h1>
-          <p>GlobalTrade: Excellence in every connection.</p>
+          <p>Royals : Excellence in every connection.</p>
         </div>
       </div>
 
