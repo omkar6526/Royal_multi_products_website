@@ -1,21 +1,41 @@
+// Footer.jsx
 import React from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp } from "react-icons/fa";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <style>{`
         .footer {
-          background: #1a1a1a;
+          background: linear-gradient(135deg, var(--royal-deep-purple), var(--royal-burgundy));
           color: #fff;
-          padding: 60px 0 20px;
-          font-family: Arial, sans-serif;
+          padding: 80px 0 20px;
+          font-family: var(--font-body);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .footer::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+          animation: rotate 30s linear infinite;
         }
 
         .container {
           width: 90%;
           margin: auto;
           max-width: 1200px;
+          position: relative;
+          z-index: 1;
         }
 
         .footer-content {
@@ -26,17 +46,36 @@ function Footer() {
         }
 
         /* Brand Section */
+        .brand-section {
+          animation: fadeInUp 0.8s ease forwards;
+        }
+
         .brand-section h2 {
-          font-size: 28px;
+          font-size: 32px;
           margin-bottom: 15px;
-          color: #fff;
+          color: var(--royal-gold);
+          font-family: var(--font-heading);
+          font-weight: 800;
+          position: relative;
+          display: inline-block;
+        }
+
+        .brand-section h2::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 50px;
+          height: 3px;
+          background: var(--royal-gold);
+          border-radius: 2px;
         }
 
         .brand-section p {
-          color: #b0b0b0;
-          line-height: 1.6;
-          margin-bottom: 20px;
-          font-size: 14px;
+          color: rgba(255,255,255,0.8);
+          line-height: 1.8;
+          margin-bottom: 25px;
+          font-size: 15px;
         }
 
         .social-icons {
@@ -45,9 +84,9 @@ function Footer() {
         }
 
         .social-icon {
-          width: 36px;
-          height: 36px;
-          background: #333;
+          width: 40px;
+          height: 40px;
+          background: rgba(255,255,255,0.1);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -55,18 +94,29 @@ function Footer() {
           color: #fff;
           cursor: pointer;
           transition: all 0.3s;
+          border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .social-icon:hover {
-          background: #d4a531;
-          transform: translateY(-3px);
+          background: var(--royal-gold);
+          transform: translateY(-5px) rotate(360deg);
+          border-color: var(--royal-gold);
         }
 
         /* Links Sections */
+        .footer-section {
+          animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .footer-section:nth-child(2) { animation-delay: 0.2s; }
+        .footer-section:nth-child(3) { animation-delay: 0.4s; }
+        .footer-section:nth-child(4) { animation-delay: 0.6s; }
+
         .footer-section h3 {
-          font-size: 18px;
+          font-size: 20px;
           margin-bottom: 20px;
-          color: #fff;
+          color: var(--royal-gold);
+          font-family: var(--font-heading);
           position: relative;
         }
 
@@ -75,9 +125,10 @@ function Footer() {
           position: absolute;
           left: 0;
           bottom: -8px;
-          width: 30px;
-          height: 2px;
-          background: #d4a531;
+          width: 40px;
+          height: 3px;
+          background: linear-gradient(90deg, var(--royal-gold), transparent);
+          border-radius: 2px;
         }
 
         .footer-links {
@@ -88,19 +139,40 @@ function Footer() {
 
         .footer-links li {
           margin-bottom: 12px;
+          transform: translateX(0);
+          transition: transform 0.3s;
+        }
+
+        .footer-links li:hover {
+          transform: translateX(5px);
         }
 
         .footer-links a {
-          color: #b0b0b0;
+          color: rgba(255,255,255,0.8);
           text-decoration: none;
           font-size: 14px;
-          transition: color 0.3s;
+          transition: all 0.3s;
           cursor: pointer;
+          position: relative;
+        }
+
+        .footer-links a::before {
+          content: '›';
+          position: absolute;
+          left: -15px;
+          opacity: 0;
+          transition: all 0.3s;
+          color: var(--royal-gold);
         }
 
         .footer-links a:hover {
-          color: #d4a531;
-          padding-left: 5px;
+          color: var(--royal-gold);
+          padding-left: 15px;
+        }
+
+        .footer-links a:hover::before {
+          opacity: 1;
+          left: 0;
         }
 
         /* Contact Section */
@@ -115,24 +187,59 @@ function Footer() {
           align-items: flex-start;
           gap: 12px;
           margin-bottom: 15px;
-          color: #b0b0b0;
+          color: rgba(255,255,255,0.8);
           font-size: 14px;
-          line-height: 1.5;
+          line-height: 1.6;
+          transition: transform 0.3s;
+        }
+
+        .contact-info li:hover {
+          transform: translateX(5px);
         }
 
         .contact-icon {
-          color: #d4a531;
+          color: var(--royal-gold);
           min-width: 20px;
           margin-top: 3px;
+          font-size: 16px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s;
+          border: none;
+          z-index: 99;
+          box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .back-to-top:hover {
+          transform: translateY(-5px) scale(1.1);
+          box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
         }
 
         /* Copyright */
         .copyright {
           text-align: center;
-          padding-top: 20px;
-          border-top: 1px solid #333;
-          color: #b0b0b0;
+          padding-top: 30px;
+          border-top: 1px solid rgba(212, 175, 55, 0.2);
+          color: rgba(255,255,255,0.6);
           font-size: 13px;
+          animation: fadeInUp 0.8s ease forwards;
+          animation-delay: 0.8s;
+          opacity: 0;
         }
 
         /* Responsive */
@@ -151,6 +258,11 @@ function Footer() {
             text-align: center;
           }
           
+          .brand-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          
           .social-icons {
             justify-content: center;
           }
@@ -158,7 +270,6 @@ function Footer() {
           .footer-section h3::after {
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
           }
           
           .footer-section h3 {
@@ -183,16 +294,16 @@ function Footer() {
               <h2>Royal</h2>
               <p>
                 Your trusted partner for wholesale and retail export-quality products. 
-                Serving customers worldwide with excellence.
+                Serving customers worldwide with excellence since 2010.
               </p>
               <div className="social-icons">
-                <div className="social-icon">
+                <div className="social-icon animate-float" style={{ animationDelay: '0.1s' }}>
                   <FaFacebookF size={16} />
                 </div>
-                <div className="social-icon">
+                <div className="social-icon animate-float" style={{ animationDelay: '0.2s' }}>
                   <FaInstagram size={16} />
                 </div>
-                <div className="social-icon">
+                <div className="social-icon animate-float" style={{ animationDelay: '0.3s' }}>
                   <FaLinkedinIn size={16} />
                 </div>
               </div>
@@ -227,7 +338,7 @@ function Footer() {
               <ul className="contact-info">
                 <li>
                   <span className="contact-icon"><FaMapMarkerAlt /></span>
-                  <span> Shop No.1 Reliable corner, Pakhal road oppo. Hussaini tower , Nashik Pin 422011</span>
+                  <span>Shop No.1 Reliable corner, Pakhal road oppo. Hussaini tower, Nashik Pin 422011</span>
                 </li>
                 <li>
                   <span className="contact-icon"><FaPhoneAlt /></span>
@@ -243,9 +354,14 @@ function Footer() {
 
           {/* Copyright */}
           <div className="copyright">
-            © {new Date().getFullYear()} Royal. All rights reserved.
+            © {new Date().getFullYear()} Royal. All rights reserved. | Crafted with ❤️ for excellence
           </div>
         </div>
+
+        {/* Back to Top Button */}
+        <button className="back-to-top" onClick={scrollToTop}>
+          <FaArrowUp />
+        </button>
       </footer>
     </>
   );

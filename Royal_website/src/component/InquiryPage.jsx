@@ -1,6 +1,7 @@
 // pages/InquiryPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaPaperPlane } from "react-icons/fa";
 
 function InquiryPage() {
   const location = useLocation();
@@ -22,6 +23,24 @@ function InquiryPage() {
       setFormData(prev => ({ ...prev, productName: product }));
     }
   }, [location]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.form-section, .sidebar-card, .feature-card');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -50,33 +69,51 @@ function InquiryPage() {
     <>
       <style>{`
         .inquiry-page {
-          padding: 20px 0 50px;
-          background: #fff;
-          font-family: Arial, sans-serif;
+          padding: 40px 0 80px;
+          background: linear-gradient(135deg, #fff, var(--royal-cream));
+          font-family: var(--font-body);
           min-height: 70vh;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .inquiry-page::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+          animation: rotate 50s linear infinite;
         }
 
         .container {
           width: 90%;
           margin: auto;
           max-width: 1200px;
+          position: relative;
+          z-index: 1;
         }
 
         /* Breadcrumb */
         .breadcrumb {
-          margin: 20px 0;
+          margin: 20px 0 30px;
           color: #666;
           font-size: 14px;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease forwards;
         }
 
         .breadcrumb a {
-          color: #7E2A0C;  /* Matching your header color */
+          color: var(--royal-deep-purple);
           text-decoration: none;
           transition: color 0.3s;
+          font-weight: 500;
         }
 
         .breadcrumb a:hover {
-          color: #d4a531;
+          color: var(--royal-gold);
         }
 
         .breadcrumb span {
@@ -87,15 +124,19 @@ function InquiryPage() {
         /* Page Header */
         .page-header {
           text-align: center;
-          margin: 30px 0 40px;
+          margin: 20px 0 50px;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease forwards 0.2s;
         }
 
         .page-header h1 {
-          font-size: 36px;
-          color: #7E2A0C;  /* Matching your header color */
-          margin-bottom: 15px;
+          font-size: 48px;
+          color: var(--royal-deep-purple);
+          margin-bottom: 20px;
           position: relative;
           display: inline-block;
+          font-family: var(--font-heading);
+          font-weight: 800;
         }
 
         .page-header h1::after {
@@ -104,42 +145,65 @@ function InquiryPage() {
           bottom: -10px;
           left: 50%;
           transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: #d4a531;
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          border-radius: 2px;
         }
 
         .page-header p {
           color: #666;
-          font-size: 16px;
+          font-size: 18px;
           max-width: 700px;
-          margin: 25px auto 0;
-          line-height: 1.6;
+          margin: 30px auto 0;
+          line-height: 1.8;
+          font-family: var(--font-body);
         }
 
         /* Main Grid Layout */
         .inquiry-grid {
           display: grid;
-          grid-template-columns: 1fr 380px;
+          grid-template-columns: 1fr 400px;
           gap: 30px;
-          margin-bottom: 50px;
+          margin-bottom: 60px;
         }
 
         /* Form Section */
         .form-section {
-          background: #f8f9fa;
-          padding: 35px;
-          border-radius: 12px;
-          border: 1px solid #eaeaea;
-          box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+          background: white;
+          padding: 40px;
+          border-radius: 24px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          box-shadow: 0 20px 40px rgba(42, 26, 74, 0.08);
+          position: relative;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        .form-section.animate-fade-in-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .form-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy), var(--royal-deep-purple));
         }
 
         .form-section h2 {
-          font-size: 24px;
-          color: #7E2A0C;
-          margin-bottom: 25px;
+          font-size: 28px;
+          color: var(--royal-deep-purple);
+          margin-bottom: 30px;
           padding-bottom: 15px;
-          border-bottom: 2px solid #d4a531;
+          border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+          font-family: var(--font-heading);
+          font-weight: 700;
         }
 
         .form-row {
@@ -156,9 +220,10 @@ function InquiryPage() {
         .form-group label {
           display: block;
           margin-bottom: 8px;
-          color: #333;
+          color: var(--royal-deep-purple);
           font-weight: 600;
           font-size: 14px;
+          font-family: var(--font-body);
         }
 
         .required {
@@ -169,19 +234,25 @@ function InquiryPage() {
         .form-group input,
         .form-group textarea {
           width: 100%;
-          padding: 12px 15px;
-          border: 1px solid #ddd;
-          border-radius: 6px;
-          font-size: 14px;
+          padding: 14px 18px;
+          border: 2px solid #eaeaea;
+          border-radius: 12px;
+          font-size: 15px;
           transition: all 0.3s;
           background: white;
+          font-family: var(--font-body);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
           outline: none;
-          border-color: #7E2A0C;
-          box-shadow: 0 0 0 3px rgba(126, 42, 12, 0.1);
+          border-color: var(--royal-gold);
+          box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+          border-color: var(--royal-burgundy);
         }
 
         .form-group textarea {
@@ -190,52 +261,86 @@ function InquiryPage() {
         }
 
         .submit-btn {
-          background: #7E2A0C;
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border: none;
-          padding: 15px 30px;
-          border-radius: 8px;
+          padding: 16px 30px;
+          border-radius: 50px;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s;
           width: 100%;
-          margin-top: 10px;
+          margin-top: 20px;
           letter-spacing: 0.5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .submit-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+          left: 100%;
         }
 
         .submit-btn:hover {
-          background: #d4a531;
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(212, 165, 49, 0.3);
+          transform: translateY(-3px);
+          box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
         }
 
         /* Sidebar Cards */
         .sidebar-card {
-          background: #f8f9fa;
-          border-radius: 12px;
-          padding: 25px;
-          margin-bottom: 25px;
-          border: 1px solid #eaeaea;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          background: white;
+          border-radius: 24px;
+          padding: 30px;
+          margin-bottom: 30px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          box-shadow: 0 15px 30px rgba(42, 26, 74, 0.08);
+          position: relative;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(30px);
         }
 
+        .sidebar-card.animate-fade-in-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .sidebar-card:nth-child(1) { animation-delay: 0.3s; }
+        .sidebar-card:nth-child(2) { animation-delay: 0.5s; }
+
         .benefits-card {
-          background: #7E2A0C;  /* Matching your header color */
+          background: linear-gradient(135deg, var(--royal-deep-purple), #1A0F2E);
           color: white;
         }
 
         .benefits-card h3 {
           color: white;
-          border-bottom-color: #d4a531;
+          border-bottom-color: rgba(212, 175, 55, 0.3);
         }
 
         .sidebar-card h3 {
-          font-size: 18px;
-          color: #7E2A0C;
-          margin-bottom: 20px;
-          padding-bottom: 10px;
-          border-bottom: 2px solid #d4a531;
+          font-size: 20px;
+          color: var(--royal-deep-purple);
+          margin-bottom: 25px;
+          padding-bottom: 12px;
+          border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+          font-family: var(--font-heading);
+          font-weight: 700;
         }
 
         .benefits-list {
@@ -245,21 +350,26 @@ function InquiryPage() {
         }
 
         .benefits-list li {
-          margin-bottom: 15px;
+          margin-bottom: 18px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          font-size: 14px;
-          line-height: 1.5;
+          gap: 15px;
+          font-size: 15px;
+          line-height: 1.6;
+          transition: transform 0.3s;
+        }
+
+        .benefits-list li:hover {
+          transform: translateX(5px);
         }
 
         .benefits-list i {
           font-style: normal;
-          color: #d4a531;
+          color: var(--royal-gold);
           font-weight: bold;
-          background: rgba(255,255,255,0.15);
-          width: 24px;
-          height: 24px;
+          background: rgba(255,255,255,0.1);
+          width: 26px;
+          height: 26px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -269,10 +379,15 @@ function InquiryPage() {
 
         .info-item {
           display: flex;
-          gap: 15px;
-          margin-bottom: 20px;
-          padding-bottom: 15px;
-          border-bottom: 1px solid #eaeaea;
+          gap: 18px;
+          margin-bottom: 25px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+          transition: transform 0.3s;
+        }
+
+        .info-item:hover {
+          transform: translateX(5px);
         }
 
         .info-item:last-child {
@@ -282,16 +397,17 @@ function InquiryPage() {
         }
 
         .info-icon {
-          width: 40px;
-          height: 40px;
-          background: #7E2A0C;
+          width: 45px;
+          height: 45px;
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 18px;
+          font-size: 20px;
           flex-shrink: 0;
+          box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
         .info-content {
@@ -299,17 +415,17 @@ function InquiryPage() {
         }
 
         .info-content h4 {
-          font-size: 14px;
+          font-size: 15px;
           color: #666;
           margin-bottom: 5px;
           font-weight: 500;
         }
 
         .info-content p {
-          color: #333;
+          color: var(--royal-deep-purple);
           font-weight: 600;
-          font-size: 14px;
-          line-height: 1.5;
+          font-size: 15px;
+          line-height: 1.6;
         }
 
         .business-hours {
@@ -325,7 +441,7 @@ function InquiryPage() {
         }
 
         .hours-item span:last-child {
-          color: #333;
+          color: var(--royal-deep-purple);
           font-weight: 600;
         }
 
@@ -333,16 +449,16 @@ function InquiryPage() {
         .quick-contact {
           display: flex;
           gap: 15px;
-          margin-top: 20px;
+          margin-top: 25px;
         }
 
         .quick-contact-btn {
           flex: 1;
-          background: #7E2A0C;
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border: none;
-          padding: 12px;
-          border-radius: 8px;
+          padding: 14px;
+          border-radius: 12px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
@@ -351,37 +467,58 @@ function InquiryPage() {
           align-items: center;
           justify-content: center;
           gap: 8px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .quick-contact-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          transition: left 0.5s;
+        }
+
+        .quick-contact-btn:hover::before {
+          left: 100%;
         }
 
         .quick-contact-btn:hover {
-          background: #d4a531;
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
         }
 
         /* Why Choose Us Section */
         .why-choose-section {
-          margin-top: 30px;
+          margin-top: 40px;
         }
 
         .why-choose-section h2 {
-          font-size: 28px;
-          color: #7E2A0C;
+          font-size: 32px;
+          color: var(--royal-deep-purple);
           text-align: center;
-          margin-bottom: 40px;
+          margin-bottom: 50px;
           position: relative;
           display: inline-block;
           left: 50%;
           transform: translateX(-50%);
+          font-family: var(--font-heading);
+          font-weight: 800;
         }
 
         .why-choose-section h2::after {
           content: '';
           position: absolute;
-          bottom: -10px;
+          bottom: -12px;
           left: 50%;
           transform: translateX(-50%);
-          width: 60px;
-          height: 3px;
-          background: #d4a531;
+          width: 80px;
+          height: 4px;
+          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          border-radius: 2px;
         }
 
         .features-grid {
@@ -392,48 +529,70 @@ function InquiryPage() {
 
         .feature-card {
           text-align: center;
-          padding: 25px 20px;
-          background: #f8f9fa;
-          border-radius: 12px;
-          transition: all 0.3s;
-          border: 1px solid #eaeaea;
+          padding: 30px 20px;
+          background: white;
+          border-radius: 20px;
+          transition: all 0.4s;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          box-shadow: 0 10px 25px rgba(42, 26, 74, 0.05);
+          opacity: 0;
+          transform: translateY(30px);
         }
 
+        .feature-card.animate-fade-in-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.6s; }
+        .feature-card:nth-child(2) { animation-delay: 0.7s; }
+        .feature-card:nth-child(3) { animation-delay: 0.8s; }
+        .feature-card:nth-child(4) { animation-delay: 0.9s; }
+
         .feature-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 25px rgba(126, 42, 12, 0.1);
-          border-color: #d4a531;
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(126, 42, 12, 0.15);
+          border-color: var(--royal-gold);
         }
 
         .feature-icon {
-          width: 70px;
-          height: 70px;
-          background: #7E2A0C;
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 30px;
+          font-size: 35px;
           margin: 0 auto 20px;
-          transition: all 0.3s;
+          transition: all 0.4s;
+          box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
 
         .feature-card:hover .feature-icon {
-          background: #d4a531;
-          transform: scale(1.1);
+          transform: rotateY(360deg) scale(1.1);
+          background: linear-gradient(135deg, var(--royal-burgundy), var(--royal-gold));
         }
 
         .feature-card h3 {
-          font-size: 18px;
-          color: #7E2A0C;
-          margin-bottom: 10px;
+          font-size: 20px;
+          color: var(--royal-deep-purple);
+          margin-bottom: 12px;
+          font-family: var(--font-heading);
+          font-weight: 700;
         }
 
         .feature-card p {
           color: #666;
           font-size: 14px;
-          line-height: 1.6;
+          line-height: 1.7;
+          font-family: var(--font-body);
+        }
+
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -444,6 +603,10 @@ function InquiryPage() {
           
           .features-grid {
             grid-template-columns: repeat(2, 1fr);
+          }
+
+          .page-header h1 {
+            font-size: 36px;
           }
         }
 
@@ -462,6 +625,10 @@ function InquiryPage() {
           
           .page-header h1 {
             font-size: 28px;
+          }
+
+          .quick-contact {
+            flex-direction: column;
           }
         }
       `}</style>
@@ -561,7 +728,7 @@ function InquiryPage() {
                 </div>
 
                 <button type="submit" className="submit-btn">
-                  Submit Inquiry
+                  Submit Inquiry <FaPaperPlane />
                 </button>
               </form>
             </div>
@@ -584,7 +751,7 @@ function InquiryPage() {
                 <h3>Contact Information</h3>
                 
                 <div className="info-item">
-                  <div className="info-icon">📞</div>
+                  <div className="info-icon"><FaPhone /></div>
                   <div className="info-content">
                     <h4>Phone</h4>
                     <p>+91 9623358693</p>
@@ -592,7 +759,7 @@ function InquiryPage() {
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">✉️</div>
+                  <div className="info-icon"><FaEnvelope /></div>
                   <div className="info-content">
                     <h4>Email</h4>
                     <p>royal.shaikh231@gmail.com</p>
@@ -600,7 +767,7 @@ function InquiryPage() {
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">📍</div>
+                  <div className="info-icon"><FaMapMarkerAlt /></div>
                   <div className="info-content">
                     <h4>Address</h4>
                     <p>Shop No.1 Reliable corner, Pakhal road, opp. Hussaini Tower, Nashik Pin 422011</p>
@@ -608,7 +775,7 @@ function InquiryPage() {
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">⏰</div>
+                  <div className="info-icon"><FaClock /></div>
                   <div className="info-content">
                     <h4>Business Hours</h4>
                     <div className="business-hours">
@@ -631,10 +798,10 @@ function InquiryPage() {
                 {/* Quick Contact Buttons */}
                 <div className="quick-contact">
                   <button className="quick-contact-btn" onClick={() => window.location.href = 'tel:+919623358693'}>
-                    📞 Call Now
+                    <FaPhone /> Call Now
                   </button>
                   <button className="quick-contact-btn" onClick={() => window.location.href = 'mailto:royal.shaikh231@gmail.com'}>
-                    ✉️ Email Us
+                    <FaEnvelope /> Email Us
                   </button>
                 </div>
               </div>

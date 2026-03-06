@@ -1,14 +1,206 @@
-/* App.css */
+/* App.css - Complete Redesign */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.app {
-  min-height: 100vh;
+:root {
+  /* Royal Color Palette */
+  --royal-deep-purple: #2A1A4A;
+  --royal-gold: #D4AF37;
+  --royal-burgundy: #7E2A0C;
+  --royal-cream: #FDF5E6;
+  --royal-charcoal: #2C2C2C;
+  --royal-sage: #8A9A7E;
+  --royal-beige: #F5F0E8;
+  --royal-soft-gold: #F8E3B0;
+  --royal-deep-brown: #4A2A1A;
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-subheading: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif;
+  
+  /* Animations */
+  --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --shadow-elegant: 0 20px 40px -10px rgba(42, 26, 74, 0.2);
+  --shadow-gold: 0 10px 30px -5px rgba(212, 175, 55, 0.3);
+  --border-gradient: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
 }
 
+/* Global Styles */
+body {
+  font-family: var(--font-body);
+  color: var(--royal-charcoal);
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+  max-width: 1400px;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes borderGlow {
+  0% { border-color: var(--royal-gold); box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+  50% { border-color: var(--royal-burgundy); box-shadow: 0 0 20px rgba(126, 42, 12, 0.5); }
+  100% { border-color: var(--royal-gold); box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s ease forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s ease forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 10s linear infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 2s infinite;
+}
+
+.animate-gradient {
+  background: linear-gradient(270deg, var(--royal-gold), var(--royal-burgundy), var(--royal-deep-purple));
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Staggered Delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+.delay-7 { animation-delay: 0.7s; }
+.delay-8 { animation-delay: 0.8s; }
+
+/* Layout */
+.app {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Sticky Header */
 header, .topbar {
   position: sticky !important;
   top: 0;
@@ -18,21 +210,45 @@ header, .topbar {
 
 nav, .navbar {
   position: sticky !important;
-  top: 60px; 
+  top: 60px;
   z-index: 999;
   width: 100%;
-  background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
-
 
 .main-content {
-  min-height: calc(100vh - 120px); 
+  min-height: calc(100vh - 120px);
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: var(--royal-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--royal-burgundy), var(--royal-gold));
+}
+
+/* Selection Color */
+::selection {
+  background: var(--royal-gold);
+  color: var(--royal-deep-purple);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   nav, .navbar {
-    top: 50px; 
+    top: 50px;
   }
 }
