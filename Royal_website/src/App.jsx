@@ -24,6 +24,7 @@ function App() {
             <Route path="/product/:category" element={<ProductPage />} />
             <Route path="/contact" element={<InquiryPage />} />
             <Route path="/inquiry" element={<InquiryPage />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <Footer/>
