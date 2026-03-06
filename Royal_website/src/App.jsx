@@ -8,6 +8,7 @@ import Header from "./component/Header";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import ProductPage from "./pages/ProductPage";
+import About from './pages/About';
 
 function App() {
   return (
