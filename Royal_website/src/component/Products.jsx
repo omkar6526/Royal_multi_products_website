@@ -99,12 +99,13 @@ function Products() {
 
         .section-header h2 {
           font-size: 42px;
-          color: var(--royal-deep-purple);
+          color: #000000 !important;
           margin-bottom: 15px;
           font-weight: 800;
           font-family: var(--font-heading);
           position: relative;
           display: inline-block;
+          text-shadow: none;
         }
 
         .section-header h2::after {
@@ -121,11 +122,12 @@ function Products() {
 
         .section-header p {
           font-size: 18px;
-          color: #666;
+          color: #333333 !important;
           max-width: 700px;
           margin: 20px auto 0;
           line-height: 1.6;
           font-family: var(--font-body);
+          opacity: 0.9;
         }
 
         .products-grid {
@@ -341,6 +343,17 @@ function Products() {
         @keyframes rotate {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         @media (max-width: 968px) {

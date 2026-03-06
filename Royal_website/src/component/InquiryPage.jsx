@@ -15,7 +15,7 @@ function InquiryPage() {
     message: ""
   });
 
-  // Pre-fill product name from URL if coming from "Inquire Now"
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const product = params.get('product');
@@ -51,10 +51,9 @@ function InquiryPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     alert("Inquiry submitted successfully! We'll get back to you within 24 hours.");
-    // Reset form after submission
+  
     setFormData({
       fullName: "",
       email: "",
@@ -335,7 +334,7 @@ function InquiryPage() {
 
         .sidebar-card h3 {
           font-size: 20px;
-          color: var(--royal-deep-purple);
+          color: white;
           margin-bottom: 25px;
           padding-bottom: 12px;
           border-bottom: 2px solid rgba(212, 175, 55, 0.3);
