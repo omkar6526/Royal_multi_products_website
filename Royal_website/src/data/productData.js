@@ -1,5 +1,8 @@
 // src/data/productData.js
-
+import bathsoap from '../assets/bathsoap.jpeg';
+import greenGrapes from '../assets/greenGrapes.jpeg';
+import hospitalAprons from '../assets/hospitalaprons.jpeg';
+import luxuryTowels from '../assets/LuxuryTowels.jpeg';
 // Categories data
 export const categories = [
   { id: 1, name: "All Products", slug: "all-products", count: 11 },
@@ -34,7 +37,7 @@ export const products = [
     slug: "medical-hospital-aprons",
     category: "Clothing & Textiles",
     categorySlug: "clothing-textiles",
-    image: "https://thumbs.dreamstime.com/b/closeup-green-surgical-smock-stethoscope-white-hanger-against-neutral-grey-background-medical-uniform-nurse-doctor-384820455.jpg",
+    image: hospitalAprons,
     images: [
       "https://thumbs.dreamstime.com/b/closeup-green-surgical-smock-stethoscope-white-hanger-against-neutral-grey-background-medical-uniform-nurse-doctor-384820455.jpg"
     ],
@@ -49,7 +52,7 @@ export const products = [
     slug: "luxury-cotton-towels",
     category: "Clothing & Textiles",
     categorySlug: "clothing-textiles",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5GB3-grc9de-jeCVFpDOCkvoLStXg7A2lg&s",
+    image: luxuryTowels,
     images: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5GB3-grc9de-jeCVFpDOCkvoLStXg7A2lg&s"
     ],
@@ -79,7 +82,7 @@ export const products = [
     slug: "organic-bath-soaps",
     category: "Soaps",
     categorySlug: "soaps",
-    image: "https://images.unsplash.com/photo-1600857063875-5a80c3a84f71?w=400&h=300&fit=crop",
+    image: bathsoap,
     images: [
       "https://images.unsplash.com/photo-1600857063875-5a80c3a84f71?w=400&h=300&fit=crop"
     ],
@@ -124,7 +127,7 @@ export const products = [
     slug: "green-grapes",
     category: "Grapes",
     categorySlug: "grapes",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s",
+    image: greenGrapes,
     images: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s"
     ],
