@@ -8,6 +8,9 @@ import luxuryTowels from '../assets/LuxuryTowels.jpeg';
 import tasbih from '../assets/Tasbih.jpeg';
 import ihrambelts from '../assets/ihrambelts.jpeg';
 import redgrapes from '../assets/redgrapes.jpeg';
+import onionpowder from '../assets/OnionPowder.jpeg';
+import onion from '../assets/onions.jpeg';
+
 // Categories data
 export const categories = [
   { id: 1, name: "All Products", slug: "all-products", count: 11 },
@@ -16,7 +19,7 @@ export const categories = [
   { id: 4, name: "Spices", slug: "spices", count: 2 },
   { id: 5, name: "Grapes", slug: "grapes", count: 2 },
   { id: 6, name: "Religious Items", slug: "religious-items", count: 2 },
-  { id: 7, name: "Onions", slug: "onionitems", count: 0 },
+  { id: 7, name: "Onions", slug: "onionitems", count: 1 },
 ];
 
 // Products data - All products from your AllProducts component
@@ -185,7 +188,37 @@ export const products = [
     description: "Comfortable belts for Ihram during pilgrimage",
     bgColor: "#f5e6d3",
     featured: true
-  }
+  },
+  {
+  id: 12,
+  name: "Fresh Red Onions",
+  title: "Fresh Red Onions",
+  slug: "fresh-red-onions",
+  category: "Onions",
+  categorySlug: "onionitems",
+  image: onion,
+  images: [
+   onion
+  ],
+  description: "Farm-fresh, pungent red onions essential for every kitchen base.",
+  bgColor: "#fce4ec",
+  featured: false
+  },
+  {
+  id: 13,
+  name: "Toasted Onion Powder",
+  title: "Toasted Onion Powder",
+  slug: "toasted-onion-powder",
+  category: "Onions",
+  categorySlug: "onionitems",
+  image: onionpowder,
+  images: [
+    onionpowder
+  ],
+  description: "Finely ground dehydrated onions for instant flavor without the prep.",
+  bgColor: "#fff9c4",
+  featured: true
+}
 ];
 
 // Featured products from your FeaturedProducts component

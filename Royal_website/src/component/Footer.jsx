@@ -1,6 +1,6 @@
 // Footer.jsx
 import React from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp, FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
   const scrollToTop = () => {
@@ -86,12 +86,12 @@ function Footer() {
         .social-icon {
           width: 40px;
           height: 40px;
-          background: rgba(255,255,255,0.1);
+          background: rgb(249, 249, 249);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #fff;
+          color: #ede1e1;
           cursor: pointer;
           transition: all 0.3s;
           border: 1px solid rgba(212, 175, 55, 0.3);
@@ -297,13 +297,24 @@ function Footer() {
               </p>
               <div className="social-icons">
                 <div className="social-icon animate-float" style={{ animationDelay: '0.1s' }}>
+                  <a href="https://www.facebook.com" target="_blank">
                   <FaFacebookF size={16} />
+                  </a>
                 </div>
                 <div className="social-icon animate-float" style={{ animationDelay: '0.2s' }}>
+                  <a href="https://www.instagram.com" target="_blank">
                   <FaInstagram size={16} />
+                  </a>
                 </div>
                 <div className="social-icon animate-float" style={{ animationDelay: '0.3s' }}>
+                  <a href="https://wa.me/919623358693" target="_blank">
+                  <FaWhatsapp size={16} />
+                  </a>
+                </div>
+                <div className="social-icon animate-float" style={{ animationDelay: '0.4s' }}>
+                  <a href="https://www.linkedin.com" target="_blank">
                   <FaLinkedinIn size={16} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -311,10 +322,11 @@ function Footer() {
             <div className="footer-section">
               <h3>Quick Links</h3>
               <ul className="footer-links">
-                <li><a>Home</a></li>
-                <li><a>About Us</a></li>
-                <li><a>All Products</a></li>
-                <li><a>Contact & Inquiry</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/products">All Products</a></li>
+                <li><a href="/inquiry">Contact & Inquiry</a></li>
+                <li><a>Careears</a></li>
               </ul>
             </div>
 
@@ -325,7 +337,8 @@ function Footer() {
                 <li><a>Soaps</a></li>
                 <li><a>Spices</a></li>
                 <li><a>Grapes</a></li>
-                <li><a>Religious Items</a></li>
+                <li><a>Hujj Special </a></li>
+                <li><a>Onion and Onion Powder</a></li>
               </ul>
             </div>
 

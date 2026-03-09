@@ -31,9 +31,9 @@ function Navbar() {
             <style>{`
                 .navbar {
                     background: ${isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'white'};
-                    padding: 15px 0;
+                    padding: 2px 0;
                     position: sticky;
-                    top: 60px;
+                    top: 30px;
                     z-index: 999;
                     width: 100%;
                     box-shadow: ${isScrolled ? '0 4px 30px rgba(42, 26, 74, 0.1)' : '0 2px 20px rgba(0,0,0,0.05)'};
@@ -88,7 +88,7 @@ function Navbar() {
 
                 .logo p {
                     font-size: 12px;
-                    color: var(--royal-gold);
+                    color: bold;
                     letter-spacing: 2px;
                     font-weight: 500;
                 }

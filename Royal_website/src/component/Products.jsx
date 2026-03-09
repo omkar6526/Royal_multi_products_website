@@ -2,12 +2,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { categories, products } from "../data/productData";
-
+import onionpowder from '../assets/OnionPowder.jpeg';
 function Products() {
   const navigate = useNavigate();
   
   // Transform categories data for display
   const productCategories = [
+    {
+  category: "Fresh Produce",
+  items: "Red Onions, White Onions, Yellow Onions, Shallots",
+  imageUrl: products.find(p => p.category === "onions")?.image ||onionpowder,
+  slug: "fresh-onions"
+},
     {
       category: "Clothing & Textiles",
       items: "School Uniforms, Hospital Aprons, Towels, Hajj Ihram, Hijab",

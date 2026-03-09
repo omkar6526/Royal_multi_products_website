@@ -48,7 +48,7 @@ function HeroSection() {
           right: -50%;
           width: 200%;
           height: 200%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 60%);
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
           animation: rotate 30s linear infinite;
         }
 
@@ -59,7 +59,7 @@ function HeroSection() {
           left: -50%;
           width: 200%;
           height: 200%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
           animation: rotate 40s linear infinite reverse;
         }
 
@@ -76,7 +76,8 @@ function HeroSection() {
 
         .hero-badge {
           display: inline-block;
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(5px);
           color: white;
           padding: 10px 25px;
           border-radius: 50px;
@@ -85,42 +86,50 @@ function HeroSection() {
           font-weight: 600;
           letter-spacing: 1px;
           text-transform: uppercase;
-          box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-          animation: float 3s ease-in-out infinite;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
           opacity: 0;
-          animation: fadeInDown 0.8s ease forwards, float 3s ease-in-out infinite 0.8s;
+          animation: fadeInDown 0.8s ease forwards;
         }
 
         .hero-title {
           font-size: 56px;
           font-weight: 800;
           line-height: 1.2;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           font-family: var(--font-heading);
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards 0.2s;
         }
 
-        .hero-title span {
-          color: var(--royal-gold);
-          position: relative;
+        /* Accent line now sits BELOW the title with a bg-matched color */
+        .hero-accent-line {
           display: inline-block;
+          color: white;
+          font-size: 24px;
+          font-weight: 600;
+          margin-bottom: 30px;
+          position: relative;
+          padding-bottom: 16px;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease forwards 0.3s;
         }
 
-        .hero-title span::after {
+        .hero-accent-line::after {
           content: '';
           position: absolute;
-          bottom: 5px;
-          left: 0;
-          width: 100%;
-          height: 10px;
-          background: rgba(212, 175, 55, 0.3);
-          z-index: -1;
-          border-radius: 5px;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 3px;
+          /* Line color blends with the dark background — subtle white-teal */
+          background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(157, 221, 143, 0.6), rgba(255,255,255,0.3));
+          border-radius: 2px;
         }
 
         .hero-text {
-          margin-top: 20px;
+          margin-top: 10px;
           font-size: 18px;
           color: rgba(255,255,255,0.9);
           line-height: 1.8;
@@ -141,11 +150,12 @@ function HeroSection() {
         }
 
         .browse-btn {
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+          background: white;
           border: none;
           padding: 15px 35px;
           border-radius: 50px;
-          color: white;
+          color: var(--royal-deep-purple);
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s;
@@ -153,7 +163,6 @@ function HeroSection() {
           letter-spacing: 0.5px;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 20px rgba(98, 247, 195, 0.4);
         }
 
         .browse-btn::before {
@@ -163,7 +172,7 @@ function HeroSection() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
           transition: left 0.5s;
         }
 
@@ -173,22 +182,24 @@ function HeroSection() {
 
         .browse-btn:hover {
           transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 4px 20px rgba(98, 247, 195, 0.4);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          background: rgba(255, 255, 255, 0.9);
         }
 
         .quote-btn {
           background: transparent;
-          border: 2px solid var(--royal-gold);
+          border: 2px solid white;
           padding: 13px 35px;
           border-radius: 50px;
           color: white;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s;
+          transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
           font-size: 16px;
           position: relative;
           overflow: hidden;
           z-index: 1;
+          box-shadow: none !important;
         }
 
         .quote-btn::before {
@@ -198,7 +209,7 @@ function HeroSection() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          background: white;
           transition: left 0.3s;
           z-index: -1;
         }
@@ -210,12 +221,27 @@ function HeroSection() {
         .quote-btn:hover {
           border-color: transparent;
           transform: translateY(-3px);
-          box-shadow: 0 8px 25px rgba(89, 225, 209, 0.4);
+          box-shadow: none !important;
+          color: var(--royal-deep-purple);
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-40px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
           .hero-title {
             font-size: 40px;
+          }
+          
+          .hero-accent-line {
+            font-size: 20px;
           }
           
           .hero-buttons {
@@ -234,6 +260,10 @@ function HeroSection() {
             font-size: 32px;
           }
           
+          .hero-accent-line {
+            font-size: 18px;
+          }
+          
           .hero-text {
             font-size: 16px;
           }
@@ -243,13 +273,16 @@ function HeroSection() {
       <section className="hero" ref={heroRef}>
         <div className="hero-container">
           <div className="hero-badge">
-            Export Quality Products Worldwide
+            EXPORT QUALITY WORLDWIDE
           </div>
 
           <h1 className="hero-title">
-            Your Trusted Partner in <br/>
-            <span>Your Trusted Partner in Wholesale and Trading Excellence</span>
+            Your Trusted Partner in
           </h1>
+          
+          <div className="hero-accent-line">
+            Wholesale and Trading Excellence
+          </div>
 
           <p className="hero-text">
             Premium quality products across clothing, soaps, spices, grapes, and religious items.
@@ -257,7 +290,7 @@ function HeroSection() {
           </p>
 
           <div className="hero-buttons">
-            <button className="browse-btn" onClick={() => navigate('/product/:category')}>
+            <button className="browse-btn" onClick={() => navigate('/products')}>
               Browse Products →
             </button>
 

@@ -12,9 +12,23 @@ function ProductDetails() {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
+  const [selectedRange, setSelectedRange] = useState("");
   const [activeTab, setActiveTab] = useState("description");
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Quantity range options
+  const quantityRanges = [
+    "0-50",
+    "50-100",
+    "100-150",
+    "150-200",
+    "200-250",
+    "250-300",
+    "300-350",
+    "350-400",
+    "400-450",
+    "450-500"
+  ];
 
   useEffect(() => {
     setLoading(true);
@@ -30,16 +44,18 @@ function ProductDetails() {
 
   const handleInquireNow = () => {
     if (product) {
-      navigate(`/contact?product=${encodeURIComponent(product.name)}`);
+      let inquiryUrl = `/contact?product=${encodeURIComponent(product.name)}`;
+      if (selectedRange) {
+        inquiryUrl += `&quantity=${encodeURIComponent(selectedRange)}`;
+      }
+      navigate(inquiryUrl);
     }
   };
 
-  const handleQuantityChange = (type) => {
-    if (type === 'increment') {
-      setQuantity(prev => prev + 1);
-    } else {
-      setQuantity(prev => prev > 1 ? prev - 1 : 1);
-    }
+  const handleRangeChange = (e) => {
+    e.stopPropagation(); // Event propagation rokne ke liye
+    console.log("Selected range:", e.target.value); // Debug ke liye
+    setSelectedRange(e.target.value);
   };
 
   const handleRelatedProductClick = (productId) => {
@@ -128,7 +144,7 @@ function ProductDetails() {
     <>
       <style>{`
         .product-details-page {
-          padding: 60px 0;
+          padding: 40px 0;
           background: linear-gradient(135deg, #fff, var(--royal-cream));
           position: relative;
           overflow: hidden;
@@ -190,7 +206,7 @@ function ProductDetails() {
         }
 
         .breadcrumb span {
-          color: #999;
+          color: #000000;
           margin: 0 8px;
         }
 
@@ -205,7 +221,7 @@ function ProductDetails() {
           border-radius: 30px;
           padding: 40px;
           position: relative;
-          overflow: hidden;
+          overflow: visible; /* Changed from hidden to visible */
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards 0.2s;
           box-shadow: 0 20px 40px rgba(0,0,0,0.05);
@@ -225,6 +241,7 @@ function ProductDetails() {
           -webkit-mask-composite: xor;
           mask-composite: exclude;
           opacity: 0.3;
+          pointer-events: none; /* Added so it doesn't block clicks */
         }
 
         /* Product Images */
@@ -288,6 +305,8 @@ function ProductDetails() {
           display: flex;
           flex-direction: column;
           gap: 20px;
+          position: relative;
+          z-index: 5; /* Added z-index */
         }
 
         .product-category {
@@ -337,56 +356,76 @@ function ProductDetails() {
           padding: 20px 0;
         }
 
-        /* Quantity Selector */
+        /* Quantity Dropdown - Completely Redesigned */
         .quantity-selector {
           display: flex;
           align-items: center;
           gap: 15px;
+          position: relative;
+          z-index: 100; /* High z-index */
         }
 
         .quantity-label {
           font-weight: 600;
           color: var(--royal-deep-purple);
+          min-width: 120px;
+          font-size: 16px;
         }
 
-        .quantity-controls {
-          display: flex;
-          align-items: center;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          border-radius: 10px;
-          overflow: hidden;
+        .dropdown-wrapper {
+          position: relative;
+          flex: 1;
+          z-index: 100;
         }
 
-        .quantity-btn {
-          width: 40px;
-          height: 40px;
-          background: none;
-          border: none;
-          font-size: 18px;
-          font-weight: 600;
+        .quantity-dropdown {
+          width: 100%;
+          padding: 14px 20px;
+          border: 2px solid rgba(212, 175, 55, 0.3);
+          border-radius: 12px;
+          font-size: 16px;
           color: var(--royal-deep-purple);
+          background: white;
           cursor: pointer;
           transition: all 0.3s;
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: right 15px center;
+          background-size: 18px;
+          position: relative;
+          z-index: 101;
         }
 
-        .quantity-btn:hover {
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
-          color: white;
+        .quantity-dropdown:hover {
+          border-color: var(--royal-gold);
+          box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
         }
 
-        .quantity-input {
-          width: 60px;
-          height: 40px;
-          border: none;
-          text-align: center;
-          font-size: 16px;
-          font-weight: 600;
-          border-left: 1px solid rgba(212, 175, 55, 0.3);
-          border-right: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .quantity-input:focus {
+        .quantity-dropdown:focus {
           outline: none;
+          border-color: var(--royal-gold);
+          box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+        }
+
+        .quantity-dropdown option {
+          color: var(--royal-deep-purple);
+          padding: 12px;
+          font-size: 15px;
+          background: white;
+        }
+
+        /* Custom dropdown arrow clickable area */
+        .dropdown-wrapper::after {
+          display: none; /* Removing pseudo-element that might block clicks */
+        }
+
+        /* For Firefox */
+        .quantity-dropdown:-moz-focusring {
+          color: transparent;
+          text-shadow: 0 0 0 var(--royal-deep-purple);
         }
 
         /* Action Buttons */
@@ -394,6 +433,8 @@ function ProductDetails() {
           display: flex;
           gap: 15px;
           margin-top: 10px;
+          position: relative;
+          z-index: 5;
         }
 
         .inquire-now-btn {
@@ -733,6 +774,31 @@ function ProductDetails() {
           .action-buttons {
             flex-direction: column;
           }
+
+          .quantity-selector {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+
+          .quantity-label {
+            min-width: auto;
+          }
+
+          .dropdown-wrapper {
+            width: 100%;
+          }
+
+          .quantity-dropdown {
+            width: 100%;
+          }
+        }
+
+        /* Debug styles - Remove after fixing */
+        .debug-info {
+          font-size: 12px;
+          color: #999;
+          margin-top: 5px;
         }
       `}</style>
 
@@ -788,23 +854,37 @@ function ProductDetails() {
 
               <p className="product-description">{product.description}</p>
 
-              {/* Quantity Selector */}
+              {/* Quantity Dropdown - Fixed Version */}
               <div className="quantity-selector">
-                <span className="quantity-label">Quantity:</span>
-                <div className="quantity-controls">
-                  <button className="quantity-btn" onClick={() => handleQuantityChange('decrement')}>−</button>
-                  <input type="text" className="quantity-input" value={quantity} readOnly />
-                  <button className="quantity-btn" onClick={() => handleQuantityChange('increment')}>+</button>
+                <span className="quantity-label">Select Quantity Range:</span>
+                <div className="dropdown-wrapper">
+                  <select 
+                    className="quantity-dropdown" 
+                    value={selectedRange} 
+                    onChange={handleRangeChange}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="">Choose range</option>
+                    {quantityRanges.map((range) => (
+                      <option key={range} value={range}>
+                        {range} units
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
+
+              {/* Debug info - Remove after fixing */}
+              {selectedRange && (
+                <div className="debug-info">
+                  Selected: {selectedRange}
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="action-buttons">
                 <button className="inquire-now-btn" onClick={handleInquireNow}>
                   Inquire Now
-                </button>
-                <button className="add-to-quote-btn">
-                  Add to Quote
                 </button>
               </div>
             </div>
