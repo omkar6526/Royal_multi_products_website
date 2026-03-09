@@ -18,7 +18,7 @@ export const categories = [
   { id: 3, name: "Soaps", slug: "soaps", count: 2 },
   { id: 4, name: "Spices", slug: "spices", count: 2 },
   { id: 5, name: "Grapes", slug: "grapes", count: 2 },
-  { id: 6, name: "Religious Items", slug: "religious-items", count: 2 },
+  { id: 6, name: "Hajj Specials", slug:"hajj-items", count: 2 },
   { id: 7, name: "Onions", slug: "onionitems", count: 1 },
 ];
 
@@ -164,8 +164,8 @@ export const products = [
     name: "Prayer Beads (Tasbih)",
     title: "Prayer Beads (Tasbih)",
     slug: "prayer-beads-tasbih",
-    category: "Religious Items",
-    categorySlug: "religious-items",
+    category: "Hajj Specials",
+    categorySlug: "hajj-items",
     image:tasbih,
     images: [
       "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU="
@@ -179,8 +179,8 @@ export const products = [
     name: "Ihram Belts",
     title: "Ihram Belts",
     slug: "ihram-belts",
-    category: "Religious Items",
-    categorySlug: "religious-items",
+    category: "Hajj Specials",
+    categorySlug: "hajj-items",
     image: ihrambelts,
     images: [
       "https://images.unsplash.com/photo-1614192377611-1d5a0e1514fc?w=400&h=300&fit=crop"
