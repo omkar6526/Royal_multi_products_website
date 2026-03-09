@@ -1,6 +1,6 @@
 import React from "react";
 import { FaHistory, FaEye, FaRocket, FaUsers } from "react-icons/fa";
-
+import { Link, useNavigate } from "react-router-dom";
 function About() {
   const values = [
     {
@@ -95,15 +95,53 @@ function About() {
           color: #666;
           line-height: 1.6;
         }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+          margin: 20px 0 40px;
+          font-size: 14px;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease forwards;
+        }
 
+        .breadcrumb a {
+          color: var(--royal-gold);
+          text-decoration: none;
+          transition: color 0.3s;
+          position: relative;
+        }
+
+        .breadcrumb a::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          transition: width 0.3s;
+        }
+
+        .breadcrumb a:hover::after {
+          width: 100%;
+        }
+
+        .breadcrumb span {
+          color: #999;
+          margin: 0 8px;
+        }
+          
         @media (max-width: 768px) {
           .values-grid { grid-template-columns: 1fr; }
           .about-hero h1 { font-size: 38px; }
         }
       `}</style>
-
+      <div className="breadcrumb">
+            <Link to="/">Home</Link> <span>&gt;</span>About Us
+          </div>
       <div className="about-hero">
         <div className="container">
+          
           <h1>Experience the <span className="gold-text">Royal</span> Standard</h1>
           <p>Royals : Excellence in every connection.</p>
         </div>
