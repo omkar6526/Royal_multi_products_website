@@ -16,6 +16,7 @@ export const categories = [
   { id: 4, name: "Spices", slug: "spices", count: 2 },
   { id: 5, name: "Grapes", slug: "grapes", count: 2 },
   { id: 6, name: "Religious Items", slug: "religious-items", count: 2 },
+  { id: 7, name: "Onions", slug: "onionitems", count: 0 },
 ];
 
 // Products data - All products from your AllProducts component

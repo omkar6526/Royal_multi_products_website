@@ -248,7 +248,7 @@ function HeroSection() {
 
           <h1 className="hero-title">
             Your Trusted Partner in <br/>
-            <span>Wholesale & Retail Excellence</span>
+            <span>Your Trusted Partner in Wholesale and Trading Excellence</span>
           </h1>
 
           <p className="hero-text">
