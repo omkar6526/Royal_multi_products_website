@@ -153,7 +153,7 @@ function HeroSection() {
           letter-spacing: 0.5px;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+          box-shadow: 0 4px 20px rgba(98, 247, 195, 0.4);
         }
 
         .browse-btn::before {
@@ -173,7 +173,7 @@ function HeroSection() {
 
         .browse-btn:hover {
           transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
+          box-shadow: 0 4px 20px rgba(98, 247, 195, 0.4);
         }
 
         .quote-btn {
@@ -210,7 +210,7 @@ function HeroSection() {
         .quote-btn:hover {
           border-color: transparent;
           transform: translateY(-3px);
-          box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+          box-shadow: 0 8px 25px rgba(89, 225, 209, 0.4);
         }
 
         @media (max-width: 768px) {

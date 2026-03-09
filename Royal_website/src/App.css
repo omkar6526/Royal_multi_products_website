@@ -9,15 +9,15 @@
 
 :root {
   /* Royal Color Palette */
-  --royal-deep-purple: #2A1A4A;
-  --royal-gold: #D4AF37;
-  --royal-burgundy: #7E2A0C;
-  --royal-cream: #FDF5E6;
+  --royal-deep-purple: #0a043e;
+  --royal-gold: #9ddd8f;
+  --royal-burgundy: #0a3047;
+  --royal-cream: #c2f4e1;
   --royal-charcoal: #2C2C2C;
   --royal-sage: #8A9A7E;
-  --royal-beige: #F5F0E8;
-  --royal-soft-gold: #F8E3B0;
-  --royal-deep-brown: #4A2A1A;
+  --royal-beige: #e8f5ef;
+  --royal-soft-gold: #c2e9e1;
+  --royal-deep-brown: #0c5575;
   
   /* Typography */
   --font-heading: 'Playfair Display', serif;
@@ -27,7 +27,7 @@
   /* Animations */
   --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   --shadow-elegant: 0 20px 40px -10px rgba(42, 26, 74, 0.2);
-  --shadow-gold: 0 10px 30px -5px rgba(212, 175, 55, 0.3);
+  --shadow-gold: 0 10px 30px -5px rgba(55, 212, 183, 0.3);
   --border-gradient: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
 }
 
