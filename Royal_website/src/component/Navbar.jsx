@@ -85,9 +85,6 @@ function Navbar() {
                     left: 100%;
                 }
 
-                .logo:hover h2 {
-                    color: var(--royal-gold);
-                }
 
                 .logo p {
                     font-size: 12px;
