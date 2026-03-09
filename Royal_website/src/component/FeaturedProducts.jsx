@@ -98,7 +98,7 @@ function FeaturedProducts() {
 
         .section-title p {
           font-size: 18px;
-          color: #666;
+          color: #242424;
           max-width: 700px;
           margin: 20px auto 0;
           line-height: 1.6;
@@ -213,8 +213,8 @@ function FeaturedProducts() {
         }
 
         .product-description {
-          font-size: 14px;
-          color: #666;
+          font-size: 18px;
+          color: #242424;
           line-height: 1.6;
           margin-bottom: 20px;
           min-height: 70px;

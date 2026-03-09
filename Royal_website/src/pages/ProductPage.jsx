@@ -413,8 +413,8 @@ function AllProducts() {
         }
 
         .product-info p {
-          font-size: 14px;
-          color: #666;
+          font-size: 18px;
+          color: #242424;
           margin-bottom: 20px;
           line-height: 1.6;
           min-height: 60px;

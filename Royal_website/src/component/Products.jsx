@@ -134,7 +134,7 @@ function Products() {
 
         .section-header p {
           font-size: 18px;
-          color: #333333 !important;
+          color: #242424 !important;
           max-width: 700px;
           margin: 20px auto 0;
           line-height: 1.6;
@@ -268,8 +268,8 @@ function Products() {
         }
 
         .product-card p {
-          color: #666;
-          font-size: 15px;
+          color: #242424;
+          font-size: 18px;
           line-height: 1.7;
           margin-bottom: 20px;
           font-family: var(--font-body);

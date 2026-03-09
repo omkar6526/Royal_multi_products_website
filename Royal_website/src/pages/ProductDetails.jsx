@@ -329,8 +329,8 @@ function ProductDetails() {
         }
 
         .product-description {
-          font-size: 16px;
-          color: #666;
+          font-size: 18px;
+          color: #242424;
           line-height: 1.8;
           border-top: 1px solid rgba(212, 175, 55, 0.2);
           border-bottom: 1px solid rgba(212, 175, 55, 0.2);

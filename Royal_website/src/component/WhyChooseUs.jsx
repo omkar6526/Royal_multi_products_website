@@ -116,7 +116,7 @@ function WhyChooseUs() {
 
         .section-header p {
           font-size: 18px;
-          color: rgba(255,255,255,0.9);
+          color: rgb(255, 255, 255);
           max-width: 600px;
           margin: 25px auto 0;
           line-height: 1.6;
