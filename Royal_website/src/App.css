@@ -20,9 +20,19 @@
   --royal-deep-brown: #0c5575;
   
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
+  /* --font-heading: 'Playfair Display', serif;
   --font-subheading: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif; */
+/* 
+  --font-heading: 'Lora', serif;
+  --font-subheading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif; */
+  
+
+  --font-heading: 'Playfair Display', serif;
+  --font-subheading: 'Lato', sans-serif;
   --font-body: 'Montserrat', sans-serif;
+
   
   /* Animations */
   --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);

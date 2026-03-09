@@ -1,8 +1,13 @@
 // src/data/productData.js
+
+// Images data
 import bathsoap from '../assets/bathsoap.jpeg';
 import greenGrapes from '../assets/greenGrapes.jpeg';
 import hospitalAprons from '../assets/hospitalaprons.jpeg';
 import luxuryTowels from '../assets/LuxuryTowels.jpeg';
+import tasbih from '../assets/Tasbih.jpeg';
+import ihrambelts from '../assets/ihrambelts.jpeg';
+import redgrapes from '../assets/redgrapes.jpeg';
 // Categories data
 export const categories = [
   { id: 1, name: "All Products", slug: "all-products", count: 11 },
@@ -142,7 +147,7 @@ export const products = [
     slug: "red-grapes",
     category: "Grapes",
     categorySlug: "grapes",
-    image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=300&fit=crop",
+    image: redgrapes,
     images: [
       "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=300&fit=crop"
     ],
@@ -157,7 +162,7 @@ export const products = [
     slug: "prayer-beads-tasbih",
     category: "Religious Items",
     categorySlug: "religious-items",
-    image: "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
+    image:tasbih,
     images: [
       "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU="
     ],
@@ -172,7 +177,7 @@ export const products = [
     slug: "ihram-belts",
     category: "Religious Items",
     categorySlug: "religious-items",
-    image: "https://images.unsplash.com/photo-1614192377611-1d5a0e1514fc?w=400&h=300&fit=crop",
+    image: ihrambelts,
     images: [
       "https://images.unsplash.com/photo-1614192377611-1d5a0e1514fc?w=400&h=300&fit=crop"
     ],
