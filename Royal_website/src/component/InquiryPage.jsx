@@ -1,4 +1,3 @@
-// pages/InquiryPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaPaperPlane } from "react-icons/fa";
@@ -6,6 +5,10 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaPaperPlane } from "reac
 function InquiryPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  
+  // New State for loading
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -14,7 +17,6 @@ function InquiryPage() {
     quantity: "",
     message: ""
   });
-
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -49,24 +51,54 @@ function InquiryPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // UPDATED HANDLE SUBMIT
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Inquiry submitted successfully! We'll get back to you within 24 hours.");
-  
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      productName: "",
-      quantity: "",
-      message: ""
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Inquiry submitted successfully! We'll get back to you within 24 hours.");
+        // Reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          productName: "",
+          quantity: "",
+          message: ""
+        });
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to send inquiry: ${errorData.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Network error. Please make sure your server is running on port 5000.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <>
       <style>{`
+        /* Keep your existing CSS styles here */
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
         .inquiry-page {
           padding: 40px 0 80px;
           background: linear-gradient(135deg, #fff, var(--royal-cream));
@@ -634,12 +666,10 @@ function InquiryPage() {
 
       <div className="inquiry-page">
         <div className="container">
-          {/* Breadcrumb */}
           <div className="breadcrumb">
             <Link to="/">Home</Link> <span>&gt;</span> Contact & Inquiry
           </div>
 
-          {/* Page Header */}
           <div className="page-header">
             <h1>Get in Touch</h1>
             <p>
@@ -648,9 +678,7 @@ function InquiryPage() {
             </p>
           </div>
 
-          {/* Main Content Grid */}
           <div className="inquiry-grid">
-            {/* Left Column - Form */}
             <div className="form-section">
               <h2>Send Inquiry</h2>
               <form onSubmit={handleSubmit}>
@@ -722,33 +750,30 @@ function InquiryPage() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell us more about your requirements, specifications, or any questions..."
+                    placeholder="Tell us more about your requirements..."
                   ></textarea>
                 </div>
 
-                <button type="submit" className="submit-btn">
-                  Submit Inquiry <FaPaperPlane />
+                {/* Updated Submit Button with Loading State */}
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Submit Inquiry"} <FaPaperPlane />
                 </button>
               </form>
             </div>
 
-            {/* Right Column - Sidebar */}
-            <div>
-              {/* Benefits Card */}
+            <div className="sidebar-column">
               <div className="sidebar-card benefits-card">
                 <h3>Why Submit an Inquiry?</h3>
                 <ul className="benefits-list">
                   <li><i>✓</i> Get custom pricing for bulk orders</li>
-                  <li><i>✓</i> Receive product samples before ordering</li>
+                  <li><i>✓</i> Receive product samples</li>
                   <li><i>✓</i> Discuss customization options</li>
-                  <li><i>✓</i> Get shipping and logistics support</li>
+                  <li><i>✓</i> Shipping and logistics support</li>
                 </ul>
               </div>
 
-              {/* Contact Information Card */}
               <div className="sidebar-card">
                 <h3>Contact Information</h3>
-                
                 <div className="info-item">
                   <div className="info-icon"><FaPhone /></div>
                   <div className="info-content">
@@ -756,7 +781,6 @@ function InquiryPage() {
                     <p>+91 9623358693</p>
                   </div>
                 </div>
-
                 <div className="info-item">
                   <div className="info-icon"><FaEnvelope /></div>
                   <div className="info-content">
@@ -764,37 +788,14 @@ function InquiryPage() {
                     <p>royal.shaikh231@gmail.com</p>
                   </div>
                 </div>
-
                 <div className="info-item">
                   <div className="info-icon"><FaMapMarkerAlt /></div>
                   <div className="info-content">
                     <h4>Address</h4>
-                    <p>Shop No.1 Reliable corner, Pakhal road, opp. Hussaini Tower, Nashik Pin 422011</p>
+                    <p>Nashik Pin 422011</p>
                   </div>
                 </div>
 
-                <div className="info-item">
-                  <div className="info-icon"><FaClock /></div>
-                  <div className="info-content">
-                    <h4>Business Hours</h4>
-                    <div className="business-hours">
-                      <div className="hours-item">
-                        <span>Monday - Friday:</span>
-                        <span>9:00 AM - 6:00 PM</span>
-                      </div>
-                      <div className="hours-item">
-                        <span>Saturday:</span>
-                        <span>9:00 AM - 2:00 PM</span>
-                      </div>
-                      <div className="hours-item">
-                        <span>Sunday:</span>
-                        <span>Closed</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Quick Contact Buttons */}
                 <div className="quick-contact">
                   <button className="quick-contact-btn" onClick={() => window.location.href = 'tel:+919623358693'}>
                     <FaPhone /> Call Now
@@ -803,33 +804,6 @@ function InquiryPage() {
                     <FaEnvelope /> Email Us
                   </button>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Why Choose Us Section */}
-          <div className="why-choose-section">
-            <h2>Why Choose Royal?</h2>
-            <div className="features-grid">
-              <div className="feature-card">
-                <div className="feature-icon">⭐</div>
-                <h3>Export Quality</h3>
-                <p>Premium products meeting international quality standards</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">🌍</div>
-                <h3>Worldwide Shipping</h3>
-                <p>Reliable logistics to customers across the globe</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">💎</div>
-                <h3>Bulk Orders</h3>
-                <p>Special pricing for wholesale and bulk purchases</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">🤝</div>
-                <h3>24/7 Support</h3>
-                <p>Dedicated team to assist you with your inquiries</p>
               </div>
             </div>
           </div>
