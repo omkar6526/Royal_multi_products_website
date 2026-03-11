@@ -1,15 +1,13 @@
-const express = require('express'); // 1. Import Express
-const nodemailer = require('nodemailer'); // 2. Import Nodemailer
-const cors = require('cors'); // 3. Import CORS
-require('dotenv').config(); // 4. Load your .env file
+const express = require('express');
+const nodemailer = require('nodemailer'); 
+const cors = require('cors');
+require('dotenv').config(); 
 
-const app = express(); // 5. Initialize 'app' (This fixes your error!)
+const app = express(); 
 
-// 6. Middleware
-app.use(cors()); // Allows your React app to connect
-app.use(express.json()); // Allows the server to read JSON data from React
+app.use(cors()); 
+app.use(express.json()); 
 
-// 7. Your Route (The code you already had)
 app.post('/api/inquiry', async (req, res) => {
   const { fullName, email, phone, productName, quantity, message } = req.body;
 
@@ -41,11 +39,11 @@ app.post('/api/inquiry', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-// Add this simple GET route
+
 app.get('/', (req, res) => {
   res.send('Server is running and ready to send emails!');
 });
-// 8. Start the server
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
