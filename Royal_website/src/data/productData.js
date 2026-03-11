@@ -161,7 +161,7 @@ export const products = [
     featured: false
   },
   {
-    id: 9,
+    id: 10,
     name: "Grapes",
     title: "Grapes",
     slug: "grapes",
@@ -176,7 +176,7 @@ export const products = [
     featured: true
   },
   {
-    id: 10,
+    id: 11,
     name: "Prayer Beads (Tasbih)",
     title: "Prayer Beads (Tasbih)",
     slug: "prayer-beads-tasbih",
@@ -191,7 +191,7 @@ export const products = [
     featured: true
   },
   {
-    id: 11,
+    id: 12,
     name: "Ihram Belts",
     title: "Ihram Belts",
     slug: "ihram-belts",
@@ -206,7 +206,7 @@ export const products = [
     featured: true
   },
   {
-  id: 12,
+  id: 13,
   name: "Fresh Red Onions",
   title: "Fresh Red Onions",
   slug: "fresh-red-onions",
@@ -221,7 +221,7 @@ export const products = [
   featured: false
   },
   {
-  id: 13,
+  id: 14,
   name: "Toasted Onion Powder",
   title: "Toasted Onion Powder",
   slug: "toasted-onion-powder",
