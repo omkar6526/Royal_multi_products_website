@@ -91,9 +91,18 @@ function HeroSection() {
           opacity: 0;
           animation: fadeInDown 0.8s ease forwards;
         }
+        .hero-title-main{
+          font-size: 80px;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 10px;
+          font-family: var(--font-heading);
+          opacity: 0;
+          animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
 
         .hero-title {
-          font-size: 56px;
+          font-size: 46px;
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 10px;
@@ -236,6 +245,10 @@ function HeroSection() {
         }
 
         @media (max-width: 768px) {
+        .hero-title-main {
+            font-size: 60px;
+          }
+
           .hero-title {
             font-size: 40px;
           }
@@ -256,6 +269,9 @@ function HeroSection() {
         }
 
         @media (max-width: 480px) {
+          .hero-title-main {
+            font-size: 42px;
+          }
           .hero-title {
             font-size: 32px;
           }
@@ -272,6 +288,9 @@ function HeroSection() {
 
       <section className="hero" ref={heroRef}>
         <div className="hero-container">
+          <div className="hero-title-main">
+            ROYAL
+          </div>
           <div className="hero-badge">
             EXPORT QUALITY WORLDWIDE
           </div>

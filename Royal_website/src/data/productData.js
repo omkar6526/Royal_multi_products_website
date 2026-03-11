@@ -8,6 +8,7 @@ import luxuryTowels from '../assets/LuxuryTowels.jpeg';
 import tasbih from '../assets/Tasbih.jpeg';
 import ihrambelts from '../assets/ihrambelts.jpeg';
 import redgrapes from '../assets/redgrapes.jpeg';
+import mixgrapes from '../assets/mixgrapes.jpeg';
 import onionpowder from '../assets/OnionPowder.jpeg';
 import onion from '../assets/onions.jpeg';
 
@@ -142,7 +143,7 @@ export const products = [
     ],
     description: "Fresh export-quality green grapes",
     bgColor: "#f5e6d3",
-    featured: true
+    featured: false
   },
   {
     id: 9,
@@ -153,7 +154,22 @@ export const products = [
     categorySlug: "grapes",
     image: redgrapes,
     images: [
-      "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=300&fit=crop"
+      redgrapes
+    ],
+    description: "Sweet and juicy red grapes",
+    bgColor: "#e0f0fa",
+    featured: false
+  },
+  {
+    id: 9,
+    name: "Grapes",
+    title: "Grapes",
+    slug: "grapes",
+    category: "Grapes",
+    categorySlug: "grapes",
+    image: mixgrapes,
+    images: [
+     mixgrapes
     ],
     description: "Sweet and juicy red grapes",
     bgColor: "#e0f0fa",

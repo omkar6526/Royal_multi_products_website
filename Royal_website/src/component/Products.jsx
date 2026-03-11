@@ -2,7 +2,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { categories, products } from "../data/productData";
+
+import bathsoap from '../assets/bathsoap.jpeg';
+import greenGrapes from '../assets/greenGrapes.jpeg';
+import hospitalAprons from '../assets/hospitalaprons.jpeg';
+import luxuryTowels from '../assets/LuxuryTowels.jpeg';
+import tasbih from '../assets/Tasbih.jpeg';
+import ihrambelts from '../assets/ihrambelts.jpeg';
+import redgrapes from '../assets/redgrapes.jpeg';
 import onionpowder from '../assets/OnionPowder.jpeg';
+import onion from '../assets/onions.jpeg';
+import mixgrapes from '../assets/mixgrapes.jpeg';
+import hajitems from '../assets/hujitems.png';
 function Products() {
   const navigate = useNavigate();
   
@@ -35,13 +46,13 @@ function Products() {
     {
       category: "Grapes",
       items: "Fresh export-quality green and red grapes",
-      imageUrl: products.find(p => p.category === "Grapes")?.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s",
+      imageUrl: mixgrapes,
       slug: "grapes"
     },
     {
-      category: "Religious Items",
+      category: "Hajj Special",
       items: "Prayer beads (Tasbih), Ihram belts, and religious accessories",
-      imageUrl: products.find(p => p.category === "Religious Items")?.image || "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
+      imageUrl: hajitems,
       slug: "religious-items"
     },
   ];

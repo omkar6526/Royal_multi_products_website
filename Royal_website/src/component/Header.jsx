@@ -27,7 +27,8 @@ function Header() {
         .topbar {
           background: linear-gradient(135deg, var(--royal-deep-purple), var(--royal-burgundy));
           color: white;
-          font-size: 14px;
+          font-size: 23px;
+          // font-weight: bold; 
           padding: 8px 0;
           position: sticky;
           top: 0;
@@ -127,12 +128,12 @@ function Header() {
         <div className="container topbar-content">
           <div className="left">
             <span className="animate-fade-in-left delay-1">
-              <FaPhoneAlt size={15} />
+              <FaPhoneAlt size={25} />
               +91 9623358693
             </span>
 
             <span className="animate-fade-in-left delay-2">
-              <BiLogoGmail size={20} />
+              <BiLogoGmail size={25} />
               royal.shaikh231@gmail.com
             </span>
           </div>
