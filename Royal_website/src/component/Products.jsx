@@ -102,7 +102,7 @@ function Products() {
 
         .section-header p {
           font-size: 18px;
-          color: #666;
+          color: #110d0d;
           max-width: 600px;
           margin-top: 10px;
         }
