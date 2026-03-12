@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: [
-      'discounts-maps-without-depends.trycloudflare.com'
+      'poison-manufacturer-sustainable-might.trycloudflare.com'
     ]
   }
 })

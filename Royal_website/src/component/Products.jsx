@@ -3,28 +3,10 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { categories, products } from "../data/productData";
 
-import bathsoap from '../assets/bathsoap.jpeg';
-import greenGrapes from '../assets/greenGrapes.jpeg';
-import hospitalAprons from '../assets/hospitalaprons.jpeg';
-import luxuryTowels from '../assets/LuxuryTowels.jpeg';
-import tasbih from '../assets/Tasbih.jpeg';
-import ihrambelts from '../assets/ihrambelts.jpeg';
-import redgrapes from '../assets/redgrapes.jpeg';
-import onionpowder from '../assets/OnionPowder.jpeg';
-import onion from '../assets/onions.jpeg';
-import mixgrapes from '../assets/mixgrapes.jpeg';
-import hajitems from '../assets/hujitems.png';
 function Products() {
   const navigate = useNavigate();
   
-  // Transform categories data for display
   const productCategories = [
-    {
-  category: "Fresh Produce",
-  items: "Red Onions, White Onions, Yellow Onions, Shallots",
-  imageUrl: products.find(p => p.category === "onions")?.image ||onionpowder,
-  slug: "fresh-onions"
-},
     {
       category: "Clothing & Textiles",
       items: "School Uniforms, Hospital Aprons, Towels, Hajj Ihram, Hijab",
@@ -46,29 +28,26 @@ function Products() {
     {
       category: "Grapes",
       items: "Fresh export-quality green and red grapes",
-      imageUrl: mixgrapes,
+      imageUrl: products.find(p => p.category === "Grapes")?.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOnf2qtnyvAsUE4dwzAnI5-EKeElSfCOX7w&s",
       slug: "grapes"
     },
     {
-      category: "Hajj Special",
+      category: "Religious Items",
       items: "Prayer beads (Tasbih), Ihram belts, and religious accessories",
-      imageUrl: hajitems,
+      imageUrl: products.find(p => p.category === "Religious Items")?.image || "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
       slug: "religious-items"
     },
   ];
 
   const handleCardClick = (category) => {
-    // Find category slug from categories data
     const categoryObj = categories.find(c => c.name === category);
     
-    // Use slug if available, otherwise create a URL-friendly version of category name
     const categoryParam = categoryObj?.slug || 
       category.toLowerCase()
         .replace(/ & /g, '-')
         .replace(/\s+/g, '-')
         .replace(/[^\w-]+/g, '');
     
-    // Navigate to the product category page with the parameter
     navigate(`/product/${categoryParam}`);
   };
 
@@ -94,88 +73,58 @@ function Products() {
     <>
       <style>{`
         .products-section {
-          padding: 80px 0;
-          background: linear-gradient(135deg, #fff, var(--royal-cream));
+          padding: 100px 0;
+          background-color: #e2e7f1; 
           position: relative;
-          overflow: hidden;
-        }
-
-        .products-section::before {
-          content: '';
-          position: absolute;
-          bottom: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-          animation: rotate 50s linear infinite reverse;
         }
 
         .container {
           width: 90%;
           margin: auto;
-          max-width: 1200px;
-          position: relative;
-          z-index: 1;
+          max-width: 1250px;
         }
 
         .section-header {
-          text-align: center;
-          margin-bottom: 50px;
-          opacity: 0;
-          animation: fadeInUp 0.8s ease forwards;
+          text-align: left; 
+          margin-bottom: 60px;
+          border-left: 5px solid var(--royal-gold);
+          padding-left: 25px;
         }
 
         .section-header h2 {
-          font-size: 42px;
-          color: #000000 !important;
-          margin-bottom: 15px;
-          font-weight: 800;
-          font-family: var(--font-heading);
-          position: relative;
-          display: inline-block;
-          text-shadow: none;
-        }
-
-        .section-header h2::after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
-          border-radius: 2px;
+          font-size: clamp(32px, 5vw, 48px);
+          color: #1a1a1a;
+          font-weight: 300; 
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          margin: 0;
         }
 
         .section-header p {
           font-size: 18px;
-          color: #242424 !important;
-          max-width: 700px;
-          margin: 20px auto 0;
-          line-height: 1.6;
-          font-family: var(--font-body);
-          opacity: 0.9;
+          color: #666;
+          max-width: 600px;
+          margin-top: 10px;
         }
 
         .products-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 40px;
         }
 
+
         .product-card {
-          background: #fff;
-          border: 1px solid rgba(212, 175, 55, 0.2);
-          border-radius: 20px;
+          background: #ffffff;
+          border-radius: 0px; 
           overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid #c5c5c5;
           cursor: pointer;
-          position: relative;
           opacity: 0;
           transform: translateY(30px);
-          box-shadow: 0 10px 30px rgba(42, 26, 74, 0.05);
         }
 
         .product-card.animate-fade-in-up {
@@ -183,153 +132,122 @@ function Products() {
           transform: translateY(0);
         }
 
-        .product-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 20px;
-          padding: 2px;
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          opacity: 0;
-          transition: opacity 0.4s;
-        }
-
-        .product-card:hover::before {
-          opacity: 1;
-        }
-
         .product-card:hover {
-          transform: translateY(-10px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(42, 26, 74, 0.15);
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .product-image {
-          width: 100%;
-          height: 240px;
-          background: linear-gradient(135deg, #f5f5f5, #eaeaea);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 80px;
-          border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-          position: relative;
+          height: 320px;
           overflow: hidden;
+          position: relative;
+          background: #f9f9f9;
         }
 
         .product-image img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          object-fit: contain; /* Shows the whole product clearly */
+          padding: 20px;
+          transition: transform 0.8s ease;
         }
 
         .product-card:hover .product-image img {
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
 
-        .product-image::after {
-          content: '';
+        .product-tag {
           position: absolute;
           top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-          transition: left 0.5s;
-        }
-
-        .product-card:hover .product-image::after {
-          left: 100%;
+          left: 0;
+          background: #eca64a;
+          color: #fff;
+          padding: 8px 15px;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
         }
 
         .product-content {
-          padding: 25px;
-          background: white;
-          position: relative;
+          padding: 30px;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
         }
 
-        .product-content::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 3px;
-          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.4s;
-        }
-
-        .product-card:hover .product-content::before {
-          transform: scaleX(1);
-        }
-
-        .product-card h3 {
-          font-size: 24px;
+        .product-category-label {
+          font-size: 12px;
+          color: var(--royal-gold);
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          margin-bottom: 15px;
           font-weight: 700;
-          margin-bottom: 12px;
-          color: var(--royal-deep-purple);
-          font-family: var(--font-heading);
-          transition: color 0.3s;
         }
 
-        .product-card:hover h3 {
-          color: var(--royal-burgundy);
+        .product-content h3 {
+          font-size: 24px;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin-bottom: 15px;
         }
 
-        .product-card p {
-          color: #242424;
-          font-size: 18px;
-          line-height: 1.7;
-          margin-bottom: 20px;
-          font-family: var(--font-body);
+        .product-content p {
+          font-size: 15px;
+          color: #070707;
+          line-height: 1.8;
+          margin-bottom: 30px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .card-buttons {
+          margin-top: auto;
+          display: flex;
+          align-items: center;
+          border-top: 1px solid #eee;
+          padding-top: 20px;
         }
 
         .view-link {
-          display: inline-flex;
+          background: none;
+          color: #1a1a1a;
+          border: none;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 13px;
+          letter-spacing: 1px;
+          cursor: pointer;
+          display: flex;
           align-items: center;
           gap: 8px;
-          color: var(--royal-deep-purple);
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 16px;
-          transition: all 0.3s;
-          cursor: pointer;
-          background: none;
-          border: none;
           padding: 0;
-          position: relative;
-        }
-
-        .view-link::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
-          transition: width 0.3s;
-        }
-
-        .view-link:hover::after {
-          width: 100%;
         }
 
         .view-link:hover {
           color: var(--royal-gold);
-          gap: 12px;
+        }
+
+        .explore-btn {
+          margin-left: auto;
+          background: #1a1a1a;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 4px;
+          font-size: 12px;
+          text-transform: uppercase;
+          border: none;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .explore-btn:hover {
+          background: var(--royal-gold);
         }
 
         .arrow {
-          font-size: 18px;
+          font-size: 16px;
           transition: transform 0.3s;
         }
 
@@ -337,18 +255,11 @@ function Products() {
           transform: translateX(5px);
         }
 
-
-        /* Staggered Animation Delays */
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.2s; }
-        .product-card:nth-child(3) { animation-delay: 0.3s; }
-        .product-card:nth-child(4) { animation-delay: 0.4s; }
-        .product-card:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
+        .product-card:nth-child(1) { transition-delay: 0.1s; }
+        .product-card:nth-child(2) { transition-delay: 0.2s; }
+        .product-card:nth-child(3) { transition-delay: 0.3s; }
+        .product-card:nth-child(4) { transition-delay: 0.4s; }
+        .product-card:nth-child(5) { transition-delay: 0.5s; }
 
         @keyframes fadeInUp {
           from {
@@ -377,7 +288,7 @@ function Products() {
           }
           
           .product-image {
-            height: 200px;
+            height: 280px;
           }
         }
       `}</style>
@@ -401,14 +312,19 @@ function Products() {
               >
                 <div className="product-image">
                   <img src={category.imageUrl} alt={category.category} />
+                  <div className="product-tag">Category</div>
                 </div>
 
                 <div className="product-content">
+                  <div className="product-category-label">EXPLORE</div>
                   <h3>{category.category}</h3>
                   <p>{category.items}</p>
-                  <button className="view-link">
-                    View Products <span className="arrow">→</span>
-                  </button>
+                  
+                  <div className="card-buttons">
+                    <button className="view-link">
+                      View Products <span className="arrow">→</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

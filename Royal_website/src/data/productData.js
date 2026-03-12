@@ -3,14 +3,15 @@
 // Images data
 import bathsoap from '../assets/bathsoap.jpeg';
 import greenGrapes from '../assets/greenGrapes.jpeg';
-import hospitalAprons from '../assets/hospitalaprons.jpeg';
-import luxuryTowels from '../assets/LuxuryTowels.jpeg';
+import hospitalAprons from '../assets/hospitalaprons.jpg';
+import luxuryTowels from '../assets/LuxuryTowels.jpg';
 import tasbih from '../assets/Tasbih.jpeg';
 import ihrambelts from '../assets/ihrambelts.jpeg';
 import redgrapes from '../assets/redgrapes.jpeg';
 import mixgrapes from '../assets/mixgrapes.jpeg';
 import onionpowder from '../assets/OnionPowder.jpeg';
 import onion from '../assets/onions.jpeg';
+import suniform from '../assets/uniform.jpg';
 
 // Categories data
 export const categories = [
@@ -32,9 +33,9 @@ export const products = [
     slug: "premium-school-uniforms",
     category: "Clothing & Textiles",
     categorySlug: "clothing-textiles",
-    image: "https://image.made-in-china.com/203f0j00KAlouVCwLacp/blog.jpg",
+    image: suniform,
     images: [
-      "https://image.made-in-china.com/203f0j00KAlouVCwLacp/blog.jpg"
+      suniform
     ],
     description: "High-quality, durable school uniforms in various sizes",
     bgColor: "#f5e6d3",
@@ -49,7 +50,7 @@ export const products = [
     categorySlug: "clothing-textiles",
     image: hospitalAprons,
     images: [
-      "https://thumbs.dreamstime.com/b/closeup-green-surgical-smock-stethoscope-white-hanger-against-neutral-grey-background-medical-uniform-nurse-doctor-384820455.jpg"
+    hospitalAprons
     ],
     description: "Sterile, comfortable aprons for medical professionals",
     bgColor: "#e0f0fa",
@@ -64,7 +65,7 @@ export const products = [
     categorySlug: "clothing-textiles",
     image: luxuryTowels,
     images: [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5GB3-grc9de-jeCVFpDOCkvoLStXg7A2lg&s"
+      luxuryTowels
     ],
     description: "Soft, absorbent premium towels for hotels and homes",
     bgColor: "#e8f0e8",
@@ -94,7 +95,7 @@ export const products = [
     categorySlug: "soaps",
     image: bathsoap,
     images: [
-      "https://images.unsplash.com/photo-1600857063875-5a80c3a84f71?w=400&h=300&fit=crop"
+     bathsoap
     ],
     description: "Premium organic bath soaps for daily use",
     bgColor: "#f5e6d3",
