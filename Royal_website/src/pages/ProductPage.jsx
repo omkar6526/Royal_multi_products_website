@@ -767,13 +767,13 @@ function AllProducts() {
             <Link to="/">Home</Link> <span>&gt;</span> All Products
           </div>
 
-          <div className="page-title" ref={pageTitleRef}>
+          {/* <div className="page-title" ref={pageTitleRef}>
             <h1>Our Products</h1>
             <p>
               Explore our comprehensive range of export-quality products, 
               carefully curated to meet international standards
             </p>
-          </div>
+          </div> */}
 
           <div className="content-wrapper">
             <div className="sidebar">

@@ -82,12 +82,12 @@ function FeaturedProducts() {
         /* --- The Card --- */
         .featured-card {
           background: #ffffff;
-          border-radius: 0px; /* Sharp edges feel more architectural/premium */
+          border-radius: 0px; 
           overflow: hidden;
           transition: transform 0.4s ease, box-shadow 0.4s ease;
           display: flex;
           flex-direction: column;
-          border: 1px solid black;
+          border: 1px solid #c5c5c5;
         }
 
         .featured-card:hover {
@@ -97,7 +97,7 @@ function FeaturedProducts() {
 
         /* --- Image Section (The Main Focus) --- */
         .card-image {
-          height: 320px;
+          height: 220px;
           overflow: hidden;
           position: relative;
           background: #f9f9f9;
@@ -106,8 +106,8 @@ function FeaturedProducts() {
         .card-image img {
           width: 100%;
           height: 100%;
-          object-fit: contain; /* Shows the whole product clearly */
-          padding: 20px;
+          object-fit: contain;
+          padding: 10px;
           transition: transform 0.8s ease;
         }
 

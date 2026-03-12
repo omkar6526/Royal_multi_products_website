@@ -138,7 +138,7 @@ function Products() {
         }
 
         .product-image {
-          height: 320px;
+          height: 220px;
           overflow: hidden;
           position: relative;
           background: #f9f9f9;
@@ -148,7 +148,7 @@ function Products() {
           width: 100%;
           height: 100%;
           object-fit: contain; /* Shows the whole product clearly */
-          padding: 20px;
+          padding: 10px;
           transition: transform 0.8s ease;
         }
 

@@ -100,7 +100,7 @@ function InquiryPage() {
         }
         
         .inquiry-page {
-          padding: 40px 0 80px;
+          padding: 0px 0 0px;
           background: linear-gradient(135deg, #fff, var(--royal-cream));
           font-family: var(--font-body);
           min-height: 70vh;
@@ -129,7 +129,7 @@ function InquiryPage() {
 
          /* Breadcrumb */
         .breadcrumb {
-          margin: 20px 0 30px;
+          margin: 18px 0 20px;
           color: #000000;
           font-size: 14px;
           opacity: 0;
@@ -198,7 +198,7 @@ function InquiryPage() {
           color: #120a0a;
           font-size: 18px;
           max-width: 700px;
-          margin: 30px auto 0;
+          margin: 10px auto 0;
           line-height: 1.8;
           font-family: var(--font-body);
         }
@@ -207,7 +207,7 @@ function InquiryPage() {
         .inquiry-grid {
           display: grid;
           grid-template-columns: 1fr 400px;
-          gap: 30px;
+          gap: 20px;
           margin-bottom: 60px;
         }
 
@@ -684,10 +684,10 @@ function InquiryPage() {
 
           <div className="page-header">
             <h1>Get in Touch</h1>
-            <p>
+            {/* <p>
               Ready to start your order? Fill out the inquiry form and our team will get back to you 
               within 24 hours with pricing, availability, and shipping details.
-            </p>
+            </p> */}
           </div>
 
           <div className="inquiry-grid">
