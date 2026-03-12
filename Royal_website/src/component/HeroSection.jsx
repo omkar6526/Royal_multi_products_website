@@ -8,6 +8,7 @@ import soapsImg from '../assets/heroImge/soap.jpg';
 import spicesImg from '../assets/heroImge/spices.jpg';
 import grapesImg from '../assets/heroImge/grapes.jpg';
 import religiousImg from '../assets/heroImge/religious.jpg';
+import schooluniformImg from '../assets/heroImge/schooluniforms.jpg';
 
 
 function HeroSection() {
@@ -22,7 +23,8 @@ function HeroSection() {
     soapsImg,
     spicesImg,
     grapesImg,
-    religiousImg
+    religiousImg,
+    schooluniformImg
   ];
 
   useEffect(() => {
