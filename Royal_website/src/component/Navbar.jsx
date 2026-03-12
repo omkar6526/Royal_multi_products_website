@@ -17,10 +17,9 @@ function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Check active link - products page or any product subpage
     const isActive = (path) => {
         if (path === '/products') {
-            // For products, check if current path starts with /products or /product/
+
             return location.pathname.startsWith('/products') || location.pathname.startsWith('/product/');
         }
         return location.pathname === path;
@@ -152,7 +151,6 @@ function Navbar() {
                     background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
                     border: none;
                     padding: 12px 28px;
-                    border-radius: 50px;
                     color: white;
                     font-weight: 600;
                     cursor: pointer;

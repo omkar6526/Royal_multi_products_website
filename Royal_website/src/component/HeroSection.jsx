@@ -224,7 +224,7 @@ function HeroSection() {
         .browse-btn:hover {
           transform: translateY(-3px) scale(1.05);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-          background: white;
+          background: #1a305e;
           color: #000;
         }
 
