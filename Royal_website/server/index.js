@@ -20,13 +20,14 @@ app.post('/api/inquiry', async (req, res) => {
   });
 
   const mailOptions = {
-    from: `"${fullName}" <${process.env.EMAIL_USER}>`,
+    from: `"${fullName}`+ email +` <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_USER,
     replyTo: email,
     subject: `New Product Inquiry: ${productName}`,
     html: `
       <h2>New Website Inquiry</h2>
-      <p><strong>Customer:</strong> ${fullName}</p>
+      <p><strong>Client full name:</strong> ${fullName}</p>
+      <p><strong>Client Email:</strong> ${email}</p>
       <p><strong>Product:</strong> ${productName}</p>
       <p><strong>Message:</strong> ${message}</p>
     `,
@@ -35,7 +36,9 @@ app.post('/api/inquiry', async (req, res) => {
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ success: true });
+    console('Email sent successfully')
   } catch (error) {
+    console.error('Error sending email:', error);
     res.status(500).json({ error: error.message });
   }
 });
