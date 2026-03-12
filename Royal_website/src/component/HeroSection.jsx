@@ -2,13 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Import all 6 images from assets
-import allProduct from '../assets/heroimge/allproduct.jpg';
-import clothingImg from '../assets/heroimge/clothing.jpg';
-import soapsImg from '../assets/heroimge/soap.jpg';
-import spicesImg from '../assets/heroimge/spices.jpg';
-import grapesImg from '../assets/heroimge/grapes.jpg';
-import religiousImg from '../assets/heroimge/religious.jpg';
+import allProduct from '../assets/heroImge/allproduct.jpg';
+import clothingImg from '../assets/heroImge/clothing.jpg';
+import soapsImg from '../assets/heroImge/soap.jpg';
+import spicesImg from '../assets/heroImge/spices.jpg';
+import grapesImg from '../assets/heroImge/grapes.jpg';
+import religiousImg from '../assets/heroImge/religious.jpg';
 
 
 function HeroSection() {
