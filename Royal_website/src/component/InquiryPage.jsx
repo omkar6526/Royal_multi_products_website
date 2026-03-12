@@ -93,7 +93,7 @@ function InquiryPage() {
       <style>{`
         /* Keep your existing CSS styles here */
         .submit-btn:disabled {
-            background: #ccc;
+            background: #ffffff;
             cursor: not-allowed;
             transform: none !important;
             box-shadow: none !important;
@@ -127,10 +127,10 @@ function InquiryPage() {
           z-index: 1;
         }
 
-        /* Breadcrumb */
+         /* Breadcrumb */
         .breadcrumb {
           margin: 20px 0 30px;
-          color: #666;
+          color: #000000;
           font-size: 14px;
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards;
@@ -140,16 +140,28 @@ function InquiryPage() {
           color: var(--royal-deep-purple);
           text-decoration: none;
           transition: color 0.3s;
-          font-weight: 500;
+          position: relative;
+          font-weight: 500; 
         }
 
-        .breadcrumb a:hover {
-          color: var(--royal-gold);
+        .breadcrumb a::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          transition: width 0.3s;
+        }
+
+        .breadcrumb a:hover::after {
+          width: 100%;
         }
 
         .breadcrumb span {
           color: #999;
-          margin: 0 5px;
+          margin: 0 8px;
         }
 
         /* Page Header */
@@ -183,7 +195,7 @@ function InquiryPage() {
         }
 
         .page-header p {
-          color: #666;
+          color: #120a0a;
           font-size: 18px;
           max-width: 700px;
           margin: 30px auto 0;
@@ -398,7 +410,7 @@ function InquiryPage() {
           font-style: normal;
           color: var(--royal-gold);
           font-weight: bold;
-          background: rgba(255,255,255,0.1);
+          background: rgb(255, 255, 255);
           width: 26px;
           height: 26px;
           display: inline-flex;

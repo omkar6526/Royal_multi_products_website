@@ -51,7 +51,7 @@ function About() {
 
         .about-content {
           padding: 80px 0;
-          background: #ffffff;
+          background: #f3f1f1;
         }
 
         .container {
@@ -92,23 +92,25 @@ function About() {
         }
 
         .value-info p {
-          color: #666;
+          color: #0c0606;
           line-height: 1.6;
         }
         
         /* Breadcrumb */
         .breadcrumb {
-          margin: 20px 0 40px;
+          margin: 20px 10px 30px;
+          color: #000000;
           font-size: 14px;
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards;
         }
 
         .breadcrumb a {
-          color: var(--royal-gold);
+          color: var(--royal-deep-purple);
           text-decoration: none;
           transition: color 0.3s;
           position: relative;
+          font-weight: 500; 
         }
 
         .breadcrumb a::after {
@@ -151,9 +153,9 @@ function About() {
         <div className="container">
           <div style={{textAlign: 'center', marginBottom: '40px'}}>
             <h2 style={{fontSize: '36px'}}>Who We Are</h2>
-            <p style={{maxWidth: '800px', margin: '20px auto', color: '#555', fontSize: '18px'}}>
+            <p style={{maxWidth: '800px', margin: '20px auto', color: '#140e0e', fontSize: '18px'}}>
               At Royal, we believe that business is built on trust. Since our inception, we have dedicated ourselves to sourcing only the finest products and delivering them with unmatched efficiency to our partners worldwide.
-            </p>
+            </p>  
           </div>
 
           <div className="values-grid">

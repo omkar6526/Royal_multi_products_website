@@ -1,10 +1,19 @@
 // Footer.jsx
 import React from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaArrowUp,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -292,28 +301,59 @@ function Footer() {
             <div className="brand-section">
               <h2>Royal</h2>
               <p>
-                Your trusted partner for wholesale and retail export-quality products. 
-                Serving customers worldwide with excellence since 2010.
+                Your trusted partner for wholesale and retail export-quality
+                products. Serving customers worldwide with excellence since
+                2010.
               </p>
               <div className="social-icons">
-                <div className="social-icon animate-float" style={{ animationDelay: '0.1s' }}>
+                <div
+                  className="social-icon animate-float"
+                  style={{ animationDelay: "0.1s" }}
+                >
                   <a href="https://www.facebook.com" target="_blank">
-                  <FaFacebookF size={16} />
+                    <FaFacebookF size={16} />
                   </a>
                 </div>
-                <div className="social-icon animate-float" style={{ animationDelay: '0.2s' }}>
-                  <a href="https://www.instagram.com" target="_blank">
-                  <FaInstagram size={16} />
+                <div
+                  className="social-icon animate-float"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  <a
+                    href="https://www.instagram.com"
+                    target="_blank"
+                    style={{
+                      color: "#E4405F",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <FaInstagram size={16} />
                   </a>
                 </div>
-                <div className="social-icon animate-float" style={{ animationDelay: '0.3s' }}>
-                  <a href="https://wa.me/919623358693" target="_blank">
-                  <FaWhatsapp size={16} />
+                <div
+                  className="social-icon animate-float"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  <a
+                    href="https://wa.me/919623358693"
+                    target="_blank"
+                    style={{
+                      color: "#06762f",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <FaWhatsapp size={16} />
                   </a>
                 </div>
-                <div className="social-icon animate-float" style={{ animationDelay: '0.4s' }}>
+                <div
+                  className="social-icon animate-float"
+                  style={{ animationDelay: "0.4s" }}
+                >
                   <a href="https://www.linkedin.com" target="_blank">
-                  <FaLinkedinIn size={16} />
+                    <FaLinkedinIn size={16} />
                   </a>
                 </div>
               </div>
@@ -322,23 +362,45 @@ function Footer() {
             <div className="footer-section">
               <h3>Quick Links</h3>
               <ul className="footer-links">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/products">All Products</a></li>
-                <li><a href="/inquiry">Contact & Inquiry</a></li>
-                <li><a>Careears</a></li>
+                <li>
+                  <a href="/home">Home</a>
+                </li>
+                <li>
+                  <a href="/about">About Us</a>
+                </li>
+                <li>
+                  <a href="/products">All Products</a>
+                </li>
+                <li>
+                  <a href="/inquiry">Contact & Inquiry</a>
+                </li>
+                <li>
+                  <a>Careears</a>
+                </li>
               </ul>
             </div>
 
             <div className="footer-section">
               <h3>Our Categories</h3>
               <ul className="footer-links">
-                <li><a>Clothing & Textiles</a></li>
-                <li><a>Soaps</a></li>
-                <li><a>Spices</a></li>
-                <li><a>Grapes</a></li>
-                <li><a>Hujj Special </a></li>
-                <li><a>Onion and Onion Powder</a></li>
+                <li>
+                  <a href="/product/:category">Clothing & Textiles</a>
+                </li>
+                <li>
+                  <a href="/product/:category">Soaps</a>
+                </li>
+                <li>
+                  <a href="/product/:category">Spices</a>
+                </li>
+                <li>
+                  <a href="/product/:category">Grapes</a>
+                </li>
+                <li>
+                  <a href="/product/:category">Hujj Special </a>
+                </li>
+                <li>
+                  <a href="/product/:category">Onion and Onion Powder</a>
+                </li>
               </ul>
             </div>
 
@@ -346,15 +408,24 @@ function Footer() {
               <h3>Contact Us</h3>
               <ul className="contact-info">
                 <li>
-                  <span className="contact-icon"><FaMapMarkerAlt /></span>
-                  <span>Shop No.1 Reliable corner, Pakhal road oppo. Hussaini tower, Nashik Pin 422011</span>
+                  <span className="contact-icon">
+                    <FaMapMarkerAlt />
+                  </span>
+                  <span>
+                    Shop No.1 Reliable corner, Pakhal road oppo. Hussaini tower,
+                    Nashik Pin 422011
+                  </span>
                 </li>
                 <li>
-                  <span className="contact-icon"><FaPhoneAlt /></span>
+                  <span className="contact-icon">
+                    <FaPhoneAlt />
+                  </span>
                   <span>+91 9623358693</span>
                 </li>
                 <li>
-                  <span className="contact-icon"><FaEnvelope /></span>
+                  <span className="contact-icon">
+                    <FaEnvelope />
+                  </span>
                   <span>royal.shaikh231@gmail.com</span>
                 </li>
               </ul>
@@ -362,7 +433,8 @@ function Footer() {
           </div>
 
           <div className="copyright">
-            © {new Date().getFullYear()} Royal. All rights reserved. | Crafted with  for excellence
+            © {new Date().getFullYear()} Royal. All rights reserved. | Crafted
+            with for excellence
           </div>
         </div>
 

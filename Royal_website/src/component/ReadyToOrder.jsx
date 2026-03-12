@@ -95,11 +95,11 @@ function ReadyToOrder() {
           border-radius: 2px;
         }
 
-        .left-content p {
+        .left-content p { 
           font-size: 18px;
           line-height: 1.8;
           margin: 30px 0;
-          color: #666;
+          color: #1a1111;
           font-family: var(--font-body);
         }
 

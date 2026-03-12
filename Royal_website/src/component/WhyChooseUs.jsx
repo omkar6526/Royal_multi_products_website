@@ -116,7 +116,7 @@ function WhyChooseUs() {
 
         .wcu-section-header p {
           font-size: 18px;
-          color: rgba(255, 255, 255, 0.9);
+          color: rgb(255, 255, 255);
           max-width: 600px;
           margin: 25px auto 0;
           line-height: 1.6;
@@ -225,7 +225,7 @@ function WhyChooseUs() {
 
         .feature-card p {
           font-size: 15px;
-          color: #2C4A3E;
+          color: #000000;
           line-height: 1.7;
           margin: 0;
           position: relative;

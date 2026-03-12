@@ -9,13 +9,23 @@ import {
 function AllProducts() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All Products");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
   const sectionRef = useRef(null);
+  const pageTitleRef = useRef(null);
 
   // Get categories with updated counts from data file
   const categories = getCategoriesWithCounts();
 
   // Get filtered products based on selected category
   const filteredProducts = getProductsByCategory(selectedCategory);
+  
+  // Pagination logic
+  const productsPerPage = 9;
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage) || 1; // Always at least 1 page
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,7 +43,7 @@ function AllProducts() {
     cards.forEach((card) => observer.observe(card));
 
     return () => observer.disconnect();
-  }, [selectedCategory]);
+  }, [selectedCategory, currentPage]);
 
   const handleViewDetails = (productId) => {
     navigate(`/product/details/${productId}`);
@@ -43,15 +53,77 @@ function AllProducts() {
     navigate(`/contact?product=${encodeURIComponent(productName)}`);
   };
 
+  const handleCategoryClick = (categoryName) => {
+    setSelectedCategory(categoryName);
+    setCurrentPage(1); // Reset to first page when changing category
+    // Scroll to page title section
+    if (pageTitleRef.current) {
+      pageTitleRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Scroll to page title section when changing pages
+    if (pageTitleRef.current) {
+      pageTitleRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
+    }
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) pageNumbers.push(i);
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = totalPages - 3; i <= totalPages; i++) pageNumbers.push(i);
+      } else {
+        pageNumbers.push(1);
+        pageNumbers.push('...');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) pageNumbers.push(i);
+        pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      }
+    }
+    
+    return pageNumbers;
+  };
+
   return (
     <>
       <style>{`
         .products-page {
-          padding: 15px 0;
+          padding: 15px 0 60px; /* Increased bottom padding */
           background: linear-gradient(135deg, #fff, var(--royal-cream));
           position: relative;
           overflow: hidden;
           font-family: var(--font-body);
+          min-height: 100vh; /* Ensure minimum height */
+          display: flex;
+          flex-direction: column;
         }
 
         .products-page::before {
@@ -76,6 +148,7 @@ function AllProducts() {
           max-width: 1200px;
           position: relative;
           z-index: 1;
+          flex: 1; /* Take available space */
         }
 
         /* Breadcrumb */
@@ -119,6 +192,7 @@ function AllProducts() {
           margin-bottom: 50px;
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards;
+          scroll-margin-top: 30px; /* Add scroll margin for better visibility */
         }
 
         .page-title h1 {
@@ -157,6 +231,7 @@ function AllProducts() {
           display: grid;
           grid-template-columns: 280px 1fr;
           gap: 30px;
+          margin-bottom: 40px; /* Add margin at bottom */
         }
 
         /* Sidebar - Categories */
@@ -212,12 +287,12 @@ function AllProducts() {
         .category-button {
           width: 100%;
           text-align: left;
-          padding: 12px 15px;
+          padding: 10px 12px; /* Reduced padding */
           background: none;
           border: 1px solid transparent;
-          border-radius: 12px;
+          border-radius: 10px; /* Slightly smaller radius */
           color: #555;
-          font-size: 15px;
+          font-size: 14px; /* Slightly smaller font */
           cursor: pointer;
           transition: all 0.3s;
           display: flex;
@@ -240,31 +315,42 @@ function AllProducts() {
           z-index: -1;
         }
 
-        .category-button:hover::before {
+        /* Only show hover animation on non-active categories */
+        .category-button:not(.active):hover::before {
           left: 0;
         }
 
-        .category-button:hover {
+        .category-button:not(.active):hover {
           color: white;
           border-color: transparent;
-          transform: translateX(5px);
+          transform: translateX(3px); /* Reduced transform */
         }
 
+        /* Active category styling - no hover animation */
         .category-button.active {
           background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border: none;
           box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+          cursor: default;
         }
 
         .category-button.active .count {
           color: white;
         }
 
+        .category-button.active::before {
+          display: none;
+        }
+
         .count {
           color: #999;
-          font-size: 13px;
+          font-size: 12px; /* Smaller count font */
           font-weight: 500;
+        }
+
+        .category-button.active .count {
+          color: white;
         }
 
         /* Products Section */
@@ -277,8 +363,8 @@ function AllProducts() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 30px;
-          padding: 20px 25px;
+          margin-bottom: 25px; /* Reduced margin */
+          padding: 15px 20px; /* Reduced padding */
           background: #fff;
           border: 1px solid rgba(212, 175, 55, 0.2);
           border-radius: 20px;
@@ -298,7 +384,7 @@ function AllProducts() {
         }
 
         .products-header h2 {
-          font-size: 24px;
+          font-size: 22px; /* Slightly smaller */
           color: var(--royal-deep-purple);
           font-weight: 700;
           font-family: var(--font-heading);
@@ -319,7 +405,8 @@ function AllProducts() {
         .products-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 25px;
+          gap: 20px; /* Reduced gap */
+          margin-bottom: 20px; /* Add margin at bottom */
         }
 
         .product-card {
@@ -366,7 +453,7 @@ function AllProducts() {
         }
 
         .product-image {
-          height: 220px;
+          height: 200px; /* Reduced height */
           position: relative;
           overflow: hidden;
         }
@@ -384,46 +471,50 @@ function AllProducts() {
 
         .category-badge {
           position: absolute;
-          top: 15px;
-          left: 15px;
+          top: 12px; /* Slightly adjusted */
+          left: 12px;
           background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
-          padding: 5px 15px;
+          padding: 4px 12px; /* Reduced padding */
           border-radius: 30px;
-          font-size: 11px;
+          font-size: 10px; /* Smaller font */
           font-weight: 600;
-          letter-spacing: 1px;
+          letter-spacing: 0.5px; /* Reduced letter spacing */
           text-transform: uppercase;
           z-index: 2;
           box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
         .product-info {
-          padding: 20px;
+          padding: 15px; /* Reduced padding */
           background: white;
         }
 
         .product-info h4 {
-          font-size: 18px;
+          font-size: 16px; /* Smaller font */
           font-weight: 700;
           color: var(--royal-deep-purple);
-          margin-bottom: 10px;
+          margin-bottom: 8px; /* Reduced margin */
           line-height: 1.4;
           font-family: var(--font-heading);
         }
 
         .product-info p {
-          font-size: 18px;
+          font-size: 14px; /* Smaller font */
           color: #242424;
-          margin-bottom: 20px;
-          line-height: 1.6;
-          min-height: 60px;
+          margin-bottom: 15px; /* Reduced margin */
+          line-height: 1.5;
+          min-height: 42px; /* Reduced min-height */
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         .product-buttons {
           display: flex;
-          gap: 12px;
-          margin-top: 15px;
+          gap: 10px; /* Reduced gap */
+          margin-top: 10px; /* Reduced margin */
         }
 
         .view-details-btn {
@@ -431,13 +522,13 @@ function AllProducts() {
           background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
           color: white;
           border: none;
-          padding: 10px 15px;
-          border-radius: 10px;
-          font-size: 13px;
+          padding: 8px 12px; /* Reduced padding */
+          border-radius: 8px; /* Smaller radius */
+          font-size: 12px; /* Smaller font */
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.3px; /* Reduced letter spacing */
           position: relative;
           overflow: hidden;
         }
@@ -467,13 +558,13 @@ function AllProducts() {
           background: transparent;
           color: var(--royal-deep-purple);
           border: 2px solid rgba(212, 175, 55, 0.3);
-          padding: 8px 15px;
-          border-radius: 10px;
-          font-size: 13px;
+          padding: 6px 12px; /* Reduced padding */
+          border-radius: 8px; /* Smaller radius */
+          font-size: 12px; /* Smaller font */
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.3px; /* Reduced letter spacing */
           position: relative;
           overflow: hidden;
           z-index: 1;
@@ -501,32 +592,43 @@ function AllProducts() {
           transform: translateY(-2px);
         }
 
-        /* Pagination */
+        /* Pagination - ALWAYS VISIBLE */
         .pagination {
-          margin-top: 50px;
+          margin-top: 30px; /* Reduced margin */
+          margin-bottom: 20px; /* Add bottom margin */
           display: flex;
           justify-content: center;
-          gap: 10px;
+          gap: 8px; /* Reduced gap */
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards 0.6s;
         }
 
         .page-btn {
-          width: 40px;
-          height: 40px;
+          min-width: 36px; /* Smaller size */
+          height: 36px; /* Smaller size */
+          padding: 0 8px;
           border: 2px solid rgba(212, 175, 55, 0.3);
           background: white;
-          border-radius: 12px;
+          border-radius: 10px; /* Smaller radius */
           cursor: pointer;
           transition: all 0.3s;
           font-weight: 600;
+          font-size: 13px; /* Smaller font */
           color: var(--royal-deep-purple);
           position: relative;
           overflow: hidden;
           z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .page-btn::before {
+        .page-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .page-btn:not(:disabled)::before {
           content: '';
           position: absolute;
           top: 0;
@@ -538,17 +640,59 @@ function AllProducts() {
           z-index: -1;
         }
 
-        .page-btn:hover::before,
-        .page-btn.active::before {
+        .page-btn:not(:disabled):hover::before,
+        .page-btn.active:not(:disabled)::before {
           left: 0;
         }
 
-        .page-btn:hover,
-        .page-btn.active {
+        .page-btn:not(:disabled):hover,
+        .page-btn.active:not(:disabled) {
           color: white;
           border-color: transparent;
-          transform: translateY(-3px);
+          transform: translateY(-2px);
           box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .page-dots {
+          display: flex;
+          align-items: center;
+          color: var(--royal-deep-purple);
+          font-weight: 600;
+          padding: 0 5px;
+          font-size: 14px;
+        }
+
+        /* Empty state styling */
+        .empty-products {
+          text-align: center;
+          padding: 60px 20px;
+          background: #fff;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          border-radius: 20px;
+          margin-bottom: 20px;
+        }
+
+        .empty-products p {
+          font-size: 18px;
+          color: #666;
+          margin-bottom: 20px;
+        }
+
+        .empty-products .browse-all-btn {
+          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+          color: white;
+          border: none;
+          padding: 12px 30px;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .empty-products .browse-all-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
 
         /* Staggered Animation Delays */
@@ -558,6 +702,9 @@ function AllProducts() {
         .product-card:nth-child(4) { animation-delay: 0.4s; }
         .product-card:nth-child(5) { animation-delay: 0.5s; }
         .product-card:nth-child(6) { animation-delay: 0.6s; }
+        .product-card:nth-child(7) { animation-delay: 0.7s; }
+        .product-card:nth-child(8) { animation-delay: 0.8s; }
+        .product-card:nth-child(9) { animation-delay: 0.9s; }
 
         @keyframes fadeInUp {
           from {
@@ -607,6 +754,10 @@ function AllProducts() {
           .page-title p {
             font-size: 16px;
           }
+          
+          .pagination {
+            flex-wrap: wrap;
+          }
         }
       `}</style>
 
@@ -616,7 +767,7 @@ function AllProducts() {
             <Link to="/">Home</Link> <span>&gt;</span> All Products
           </div>
 
-          <div className="page-title">
+          <div className="page-title" ref={pageTitleRef}>
             <h1>Our Products</h1>
             <p>
               Explore our comprehensive range of export-quality products, 
@@ -632,7 +783,9 @@ function AllProducts() {
                   <li key={category.id} className="category-item">
                     <button
                       className={`category-button ${selectedCategory === category.name ? 'active' : ''}`}
-                      onClick={() => setSelectedCategory(category.name)}
+                      onClick={() => handleCategoryClick(category.name)}
+                      onMouseEnter={() => setHoveredCategory(category.name)}
+                      onMouseLeave={() => setHoveredCategory(null)}
                     >
                       {category.name}
                       <span className="count">({category.count})</span>
@@ -646,50 +799,87 @@ function AllProducts() {
               <div className="products-header">
                 <h2>{selectedCategory}</h2>
                 <div className="showing-info">
-                  <span>Showing {filteredProducts.length} products</span>
+                  <span>Showing {currentProducts.length} of {filteredProducts.length} products</span>
                   <small>
-                    Page 1 of {Math.ceil(filteredProducts.length / 9)}
+                    Page {currentPage} of {totalPages}
                   </small>
                 </div>
               </div>
 
-              <div className="products-grid">
-                {filteredProducts.slice(0, 9).map((product) => (
-                  <div className="product-card" key={product.id}>
-                    <div className="product-image">
-                      <img src={product.image} alt={product.name} />
-                      <div className="category-badge">{product.category}</div>
-                    </div>
-                    <div className="product-info">
-                      <h4>{product.name}</h4>
-                      <p>{product.description}</p>
-                      <div className="product-buttons">
-                        <button 
-                          className="view-details-btn"
-                          onClick={() => handleViewDetails(product.id)}
-                        >
-                          View Details
-                        </button>
-                        <button 
-                          className="inquire-btn"
-                          onClick={() => handleInquireNow(product.name)}
-                        >
-                          Inquire
-                        </button>
+              {currentProducts.length > 0 ? (
+                <div className="products-grid">
+                  {currentProducts.map((product) => (
+                    <div className="product-card" key={product.id}>
+                      <div className="product-image">
+                        <img src={product.image} alt={product.name} />
+                        <div className="category-badge">{product.category}</div>
+                      </div>
+                      <div className="product-info">
+                        <h4>{product.name}</h4>
+                        <p>{product.description}</p>
+                        <div className="product-buttons">
+                          <button 
+                            className="view-details-btn"
+                            onClick={() => handleViewDetails(product.id)}
+                          >
+                            View Details
+                          </button>
+                          <button 
+                            className="inquire-btn"
+                            onClick={() => handleInquireNow(product.name)}
+                          >
+                            Inquire
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              {filteredProducts.length > 9 && (
-                <div className="pagination">
-                  <button className="page-btn active">1</button>
-                  <button className="page-btn">2</button>
-                  <button className="page-btn">3</button>
-                  <button className="page-btn">→</button>
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-products">
+                  <p>No products found in this category.</p>
+                  <button 
+                    className="browse-all-btn"
+                    onClick={() => handleCategoryClick("All Products")}
+                  >
+                    Browse All Products
+                  </button>
                 </div>
               )}
+
+              {/* Pagination - ALWAYS VISIBLE even with 1 page */}
+              <div className="pagination">
+                <button 
+                  className="page-btn"
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                >
+                  ←
+                </button>
+                
+                {getPageNumbers().map((pageNum, index) => (
+                  pageNum === '...' ? (
+                    <span key={`dots-${index}`} className="page-dots">...</span>
+                  ) : (
+                    <button
+                      key={pageNum}
+                      className={`page-btn ${currentPage === pageNum ? 'active' : ''}`}
+                      onClick={() => handlePageChange(pageNum)}
+                      disabled={totalPages === 1} // Disable if only one page
+                    >
+                      {pageNum}
+                    </button>
+                  )
+                ))}
+                
+                <button 
+                  className="page-btn"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  →
+                </button>
+              </div>
             </div>
           </div>
         </div>
