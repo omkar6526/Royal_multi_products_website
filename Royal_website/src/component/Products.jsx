@@ -69,6 +69,7 @@ function Products() {
     };
   });
 
+  // UPDATED: Navigate to /product/:category to match your App.js route
   const handleCardClick = (category) => {
     const categoryObj = categories.find((c) => c.name === category);
 
@@ -80,6 +81,7 @@ function Products() {
         .replace(/\s+/g, "-")
         .replace(/[^\w-]+/g, "");
 
+    // Navigate to product page with category (matches your /product/:category route)
     navigate(`/product/${categoryParam}`);
   };
 
