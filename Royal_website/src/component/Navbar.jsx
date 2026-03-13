@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -19,7 +18,6 @@ function Navbar() {
 
     const isActive = (path) => {
         if (path === '/products') {
-
             return location.pathname.startsWith('/products') || location.pathname.startsWith('/product/');
         }
         return location.pathname === path;
@@ -84,10 +82,9 @@ function Navbar() {
                     left: 100%;
                 }
 
-
                 .logo p {
                     font-size: 12px;
-                    color: bold;
+                    color: var(--royal-charcoal, #333); /* Fixed invalid "color: bold" bug */
                     letter-spacing: 2px;
                     font-weight: 500;
                 }
@@ -130,20 +127,11 @@ function Navbar() {
                     border-radius: 2px;
                 }
 
-                .menu li a:hover {
+                .menu li a:hover, .menu li a.active {
                     color: var(--royal-deep-purple);
                 }
 
-                .menu li a:hover::after {
-                    width: 100%;
-                }
-
-                .menu li a.active {
-                    color: var(--royal-deep-purple);
-                    font-weight: 700;
-                }
-
-                .menu li a.active::after {
+                .menu li a:hover::after, .menu li a.active::after {
                     width: 100%;
                 }
 
@@ -188,6 +176,9 @@ function Navbar() {
                     color: var(--royal-deep-purple);
                     cursor: pointer;
                     transition: color 0.3s;
+                    /* Fix 1: Added explicit positioning and z-index to keep it above the dropdown */
+                    position: relative;
+                    z-index: 1000;
                 }
 
                 .mobile-menu-icon:hover {
@@ -196,7 +187,7 @@ function Navbar() {
 
                 @media (max-width: 768px) {
                     .navbar {
-                        top: 50px;
+                        top: 50px; 
                     }
 
                     .mobile-menu-icon {
@@ -204,17 +195,20 @@ function Navbar() {
                     }
 
                     .right-menu {
-                        position: fixed;
-                        top: 110px;
+                        /* Fix 2: Changed from 'fixed' to 'absolute' to prevent backdrop-filter bugs */
+                        position: absolute; 
+                        /* Fix 3: Set top to 100% so it perfectly drops down right below the navbar */
+                        top: 100%; 
                         left: ${isMobileMenuOpen ? '0' : '-100%'};
                         width: 100%;
-                        height: calc(100vh - 110px);
+                        height: 100vh;
                         background: white;
                         flex-direction: column;
                         padding: 40px 20px;
                         transition: left 0.3s ease;
                         z-index: 998;
                         overflow-y: auto;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                     }
 
                     .menu {
@@ -251,14 +245,17 @@ function Navbar() {
                                 <Link 
                                     to="/" 
                                     className={isActive('/') ? 'active' : ''}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Home
                                 </Link>
                             </li>
                             <li className="animate-fade-in-down delay-2">
+                                {/* Fix 4: Also updated the 'to' path as noted in your comment */}
                                 <Link 
-                                    to="/product/:category"  // Fixed: Changed from "/product/:category" to "/products"
+                                    to="/products" 
                                     className={isActive('/products') ? 'active' : ''}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Products
                                 </Link>
@@ -267,6 +264,7 @@ function Navbar() {
                                 <Link 
                                     to="/about" 
                                     className={isActive('/about') ? 'active' : ''}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     About Us
                                 </Link>
@@ -275,7 +273,10 @@ function Navbar() {
 
                         <button 
                             className="inquiry-btn animate-fade-in-down delay-4"
-                            onClick={() => navigate('/contact')}
+                            onClick={() => {
+                                navigate('/contact');
+                                setIsMobileMenuOpen(false);
+                            }}
                         >
                             Get Inquiry
                         </button>
