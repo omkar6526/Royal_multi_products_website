@@ -25,19 +25,20 @@ function Header() {
     <>
       <style>{`
         .topbar {
-          background: linear-gradient(135deg, var(--royal-deep-purple), var(--royal-burgundy));
+          background: rgba(2, 27, 61, 0.86);
           color: white;
-          font-size: 23px;
+          font-size: 20px;
           // font-weight: bold; 
-          padding: 8px 0;
+          padding-top: 5px;
+          padding-bottom: 5px;
           position: sticky;
           top: 0;
           z-index: 1000;
           width: 100%;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+          box-shadow: 0 0.5px 5px rgba(2, 84, 198, 0.96);
           transform: translateY(${isVisible ? '0' : '-100%'});
           transition: transform 0.3s ease;
-          border-bottom: 2px solid var(--royal-gold);
+          
         }
 
         .container {
@@ -90,7 +91,7 @@ function Header() {
         .right {
           font-weight: 500;
           letter-spacing: 0.5px;
-          padding: 4px 12px;
+          padding: 4px 0px;
           background: rgba(212, 175, 55, 0.2);
           border-radius: 30px;
           border: 1px solid var(--royal-gold);
@@ -115,11 +116,7 @@ function Header() {
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-          }
-
-          .right {
-            font-size: 12px;
-            width: 100%;
+            font-size: 16px;
           }
         }
       `}</style>
@@ -128,19 +125,16 @@ function Header() {
         <div className="container topbar-content">
           <div className="left">
             <span className="animate-fade-in-left delay-1">
-              <FaPhoneAlt size={25} />
+              <FaPhoneAlt size={20} />
               +91 9623358693
             </span>
 
             <span className="animate-fade-in-left delay-2">
-              <BiLogoGmail size={25} />
+              <BiLogoGmail size={20} />
               royal.shaikh231@gmail.com
             </span>
           </div>
 
-          <div className="right animate-fade-in-right delay-3">
-            Wholesale & Retail | Export Quality Products
-          </div>
         </div>
       </div>
     </>

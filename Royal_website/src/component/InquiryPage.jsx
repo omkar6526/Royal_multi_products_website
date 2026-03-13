@@ -681,14 +681,14 @@ function InquiryPage() {
           <div className="breadcrumb">
             <Link to="/">Home</Link> <span>&gt;</span> Contact & Inquiry
           </div>
-
+{/* 
           <div className="page-header">
             <h1>Get in Touch</h1>
             {/* <p>
               Ready to start your order? Fill out the inquiry form and our team will get back to you 
               within 24 hours with pricing, availability, and shipping details.
-            </p> */}
-          </div>
+            </p> 
+          </div> */}
 
           <div className="inquiry-grid">
             <div className="form-section">

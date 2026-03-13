@@ -747,16 +747,6 @@ function ProductPage() {
             )}
           </div>
 
-          {/* Page Title */}
-          <div className="page-title">
-            <h1>{selectedCategory}</h1>
-            <p>
-              {selectedCategory === "All Products" 
-                ? "Explore our comprehensive range of export-quality products, carefully curated to meet international standards"
-                : `Browse our collection of premium ${selectedCategory.toLowerCase()}`}
-            </p>
-          </div>
-
           <div className="content-wrapper">
             {/* Sidebar Categories */}
             <div className="sidebar">
