@@ -2,11 +2,17 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { categories, products } from "../data/productData";
-
+import onionpowder from '../assets/OnionPowder.jpeg';
 function Products() {
   const navigate = useNavigate();
   
   const productCategories = [
+    {
+      category: "Fresh Produce",
+      items: "Farm-fresh, crisp onions including Red, Yellow, and White varieties, perfect for culinary use.",
+      imageUrl: onionpowder,
+      slug: "onionitems"
+    },
     {
       category: "Clothing & Textiles",
       items: "School Uniforms, Hospital Aprons, Towels, Hajj Ihram, Hijab",
@@ -32,7 +38,7 @@ function Products() {
       slug: "grapes"
     },
     {
-      category: "Religious Items",
+      category: "Hajj Specials",
       items: "Prayer beads (Tasbih), Ihram belts, and religious accessories",
       imageUrl: products.find(p => p.category === "Religious Items")?.image || "https://media.istockphoto.com/id/1360990467/photo/souvenir-stall-with-variety-of-colorful-souvenirs-wooden-beads-bracelets-and-amulets-street.jpg?s=612x612&w=is&k=20&c=fg4Q8JA1cUKXLTFej8BZKCRd7vViggYK1DaPYuM6YTU=",
       slug: "religious-items"
@@ -116,7 +122,7 @@ function Products() {
 
         .product-card {
           background: #ffffff;
-          border-radius: 0px; 
+          border-radius: 15px; 
           overflow: hidden;
           transition: transform 0.4s ease, box-shadow 0.4s ease;
           display: flex;
@@ -160,9 +166,9 @@ function Products() {
           position: absolute;
           top: 0;
           left: 0;
-          background: #eca64a;
+          background: #bcad2c92;
           color: #fff;
-          padding: 8px 15px;
+          padding: 12px 25px;
           font-size: 10px;
           text-transform: uppercase;
           letter-spacing: 2px;

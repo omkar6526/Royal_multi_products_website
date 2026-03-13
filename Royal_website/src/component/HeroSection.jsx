@@ -207,7 +207,7 @@ function HeroSection() {
 
         .browse-btn {
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-          background: gold;
+          background: #f7dc44db;
           border: none;
           padding: 15px 35px;
           color: #000;
@@ -224,7 +224,7 @@ function HeroSection() {
         .browse-btn:hover {
           transform: translateY(-3px) scale(1.05);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-          background: #1a305e;
+          background: #fdad00e7;
           color: #000;
         }
 

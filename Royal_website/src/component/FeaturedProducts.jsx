@@ -82,7 +82,7 @@ function FeaturedProducts() {
         /* --- The Card --- */
         .featured-card {
           background: #ffffff;
-          border-radius: 0px; 
+          border-radius: 15px; 
           overflow: hidden;
           transition: transform 0.4s ease, box-shadow 0.4s ease;
           display: flex;
@@ -119,10 +119,10 @@ function FeaturedProducts() {
           position: absolute;
           top: 0;
           left: 0;
-          background: #eca64a;
+          background:#bcad2c92;
           color: #fff;
           padding: 12px 25px;
-          font-size: 15px;
+          font-size: 10px;
           text-transform: uppercase;
           letter-spacing: 2px;
         }
@@ -191,7 +191,7 @@ function FeaturedProducts() {
 
         .inquire-btn {
           margin-left: auto;
-          background: #1a1a1a;
+          background:var(--royal-button-color-b);
           color: white;
           padding: 20px 30px;
           border-radius: 4px;
