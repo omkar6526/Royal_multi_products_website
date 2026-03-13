@@ -37,14 +37,15 @@ function FeaturedProducts() {
       <style>{`
         /* FeaturedProducts.css style block */
         .featured-section {
-          padding: 100px 0;
+          padding-bottom: 100px;
+          padding-top: 30px;
           background-color: #fcfcfc; /* Clean, off-white background */
           position: relative;
         }
 
         .container {
           width: 90%;
-          margin: auto;
+          margin: 0px;
           max-width: 1250px;
         }
 

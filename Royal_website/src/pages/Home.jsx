@@ -9,9 +9,9 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <FeaturedProducts/>
-      <Products/>
       
+      <Products/>
+      <FeaturedProducts/>
       <WhyChooseUs/>
       <ReadyToOrder/>
     </>
