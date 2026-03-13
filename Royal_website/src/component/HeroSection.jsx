@@ -1,4 +1,3 @@
-// HeroSection.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,13 +9,12 @@ import grapesImg from '../assets/heroImge/grapes.jpg';
 import religiousImg from '../assets/heroImge/religious.jpg';
 import schooluniformImg from '../assets/heroImge/schooluniforms.jpg';
 
-
 function HeroSection() {
   const navigate = useNavigate();
   const heroRef = useRef(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   
-  // 6 images for the carousel - using imported images
   const carouselImages = [
     allProduct,
     clothingImg,
@@ -27,32 +25,18 @@ function HeroSection() {
     schooluniformImg
   ];
 
+  // Trigger entrance animations on mount
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
-
-    return () => observer.disconnect();
+    setIsLoaded(true);
   }, []);
 
-  // Auto-scroll carousel effect
+  // Auto-scroll carousel effect (Slightly slower for elegance)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => 
         prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // 3 seconds
+    }, 5000); // Increased to 5s to allow the zoom animation to breathe
 
     return () => clearInterval(interval);
   }, [carouselImages.length]);
@@ -60,8 +44,9 @@ function HeroSection() {
   return (
     <>
       <style>{`
+        /* Core Layout */
         .hero {
-          min-height: 600px;
+          min-height: 100vh; /* Full screen height for maximum impact */
           display: flex;
           align-items: center;
           justify-content: center;
@@ -70,9 +55,10 @@ function HeroSection() {
           padding: 80px 20px;
           position: relative;
           overflow: hidden;
+          font-family: 'Inter', system-ui, sans-serif;
         }
 
-        /* Carousel Container */
+        /* Animated Carousel Background (Ken Burns Effect) */
         .hero-carousel {
           position: absolute;
           top: 0;
@@ -80,6 +66,7 @@ function HeroSection() {
           width: 100%;
           height: 100%;
           z-index: 0;
+          background-color: #000;
         }
 
         .carousel-image {
@@ -90,14 +77,16 @@ function HeroSection() {
           height: 100%;
           object-fit: cover;
           opacity: 0;
-          transition: opacity 1s ease-in-out;
+          transform: scale(1);
+          transition: opacity 1.5s ease-in-out, transform 7s linear;
         }
 
         .carousel-image.active {
-          opacity: 1; /* Full opacity - image clearly visible */
+          opacity: 1;
+          transform: scale(1.1); /* Slow zoom in */
         }
 
-        /* Dark overlay - Black opacity for images */
+        /* Premium Gradient Overlay */
         .hero::after {
           content: '';
           position: absolute;
@@ -105,69 +94,88 @@ function HeroSection() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.6); /* Pure black with 60% opacity */
+          background: linear-gradient(
+            to bottom, 
+            rgba(0, 0, 0, 0.4) 0%, 
+            rgba(0, 0, 0, 0.7) 100%
+          );
           z-index: 1;
         }
 
+        /* Content Container */
         .hero-container {
-          max-width: 900px;
+          max-width: 1000px;
           position: relative;
           z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
+        /* Glassmorphism Badge */
         .hero-badge {
-          display: inline-block;
-          background: rgba(255, 215, 0, 0.2); /* Gold tint */
-          backdrop-filter: blur(4px);
-          color: white;
-          padding: 10px 25px;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 215, 0, 0.4);
+          color: #FFD700;
+          padding: 8px 24px;
           border-radius: 50px;
-          font-size: 14px;
-          margin-bottom: 20px;
-          font-weight: 600;
-          letter-spacing: 1px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 2px;
           text-transform: uppercase;
-          border: 1px solid rgba(255, 215, 0, 0.3);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+          margin-bottom: 30px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          
+          /* Animation */
           opacity: 0;
-          animation: fadeInDown 0.8s ease forwards;
+          transform: translateY(30px);
         }
         
+        /* Gold Gradient Main Title */
         .hero-title-main {
-          font-size: 80px;
-          font-weight: 800;
-          line-height: 1.2;
-          margin-bottom: 10px;
-          font-family: var(--font-heading);
+          font-size: 100px;
+          font-weight: 900;
+          line-height: 1;
+          margin-bottom: 15px;
+          letter-spacing: 4px;
+          background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.6));
+          
+          /* Animation */
           opacity: 0;
-          animation: fadeInUp 0.8s ease forwards 0.2s;
-          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-          color: white;
+          transform: translateY(30px);
         }
 
         .hero-title {
-          font-size: 46px;
-          font-weight: 800;
+          font-size: 42px;
+          font-weight: 300;
           line-height: 1.2;
-          margin-bottom: 15px;
-          font-family: var(--font-heading);
+          margin-bottom: 10px;
+          color: #ffffff;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+          
+          /* Animation */
           opacity: 0;
-          animation: fadeInUp 0.8s ease forwards 0.2s;
-          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-          color: white;
+          transform: translateY(30px);
         }
 
+        /* Animated Accent Line */
         .hero-accent-line {
-          display: inline-block;
-          color: white;
-          font-size: 24px;
+          font-size: 28px;
           font-weight: 600;
           margin-bottom: 30px;
           position: relative;
-          padding-bottom: 16px;
+          padding-bottom: 20px;
+          color: #ffffff;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+          
+          /* Animation */
           opacity: 0;
-          animation: fadeInUp 0.8s ease forwards 0.3s;
-          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+          transform: translateY(30px);
         }
 
         .hero-accent-line::after {
@@ -176,120 +184,146 @@ function HeroSection() {
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: 80px;
+          width: 0px; /* Starts at 0 for animation */
           height: 3px;
-          background: linear-gradient(90deg, transparent, gold, transparent);
+          background: linear-gradient(90deg, transparent, #FFD700, transparent);
           border-radius: 2px;
+          transition: width 1s ease-in-out 1s; /* Animates in after text */
         }
 
         .hero-text {
-          margin-top: 10px;
           font-size: 18px;
-          color: white;
+          color: #e2e8f0;
           line-height: 1.8;
-          max-width: 700px;
-          margin-left: auto;
-          margin-right: auto;
+          max-width: 750px;
+          margin: 0 auto 40px auto;
+          font-weight: 400;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+          
+          /* Animation */
           opacity: 0;
-          animation: fadeInUp 0.8s ease forwards 0.4s;
-          text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
-          font-weight: 500;
+          transform: translateY(30px);
         }
 
-        .hero-buttons {
-          margin-top: 40px;
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-          opacity: 0;
-          animation: fadeInUp 0.8s ease forwards 0.6s;
-        }
-
+        /* Premium Button */
         .browse-btn {
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-          background: #f7dc44db;
+          background: linear-gradient(135deg, #FFD700 0%, #FBA500 100%);
           border: none;
-          padding: 15px 35px;
-          color: #000;
-          font-weight: 600;
+          padding: 18px 45px;
+          color: #1a1a1a;
+          font-weight: 700;
           cursor: pointer;
-          transition: all 0.3s;
           font-size: 16px;
-          letter-spacing: 0.5px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          border-radius: 4px;
+          box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           position: relative;
           overflow: hidden;
-          border-radius: 0px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          
+          /* Animation */
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        /* Button Shine Effect */
+        .browse-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+          transform: skewX(-25deg);
+          animation: shine 4s infinite;
         }
 
         .browse-btn:hover {
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-          background: #fdad00e7;
-          color: #000;
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+          background: linear-gradient(135deg, #FBA500 0%, #FFD700 100%);
         }
 
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
+        .btn-arrow {
+          transition: transform 0.3s ease;
         }
 
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-40px); }
-          to { opacity: 1; transform: translateY(0); }
+        .browse-btn:hover .btn-arrow {
+          transform: translateX(5px);
         }
 
+        /* Triggering Animations when loaded */
+        .is-loaded .hero-badge {
+          animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+        }
+        .is-loaded .hero-title-main {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+        }
+        .is-loaded .hero-title {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+        }
+        .is-loaded .hero-accent-line {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+        }
+        .is-loaded .hero-accent-line::after {
+          width: 120px; /* Expands line */
+        }
+        .is-loaded .hero-text {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+        }
+        .is-loaded .browse-btn {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+        }
+
+        /* Keyframes */
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes shine {
+          0% { left: -100%; }
+          20% { left: 200%; }
+          100% { left: 200%; }
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-          .hero-title-main {
-            font-size: 60px;
-          }
-
-          .hero-title {
-            font-size: 36px;
-          }
-          
-          .hero-accent-line {
-            font-size: 20px;
-          }
-          
-          .hero-buttons {
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-          }
-          
-          .browse-btn {
-            width: 100%;
-            max-width: 280px;
-          }
+          .hero { min-height: 90vh; }
+          .hero-title-main { font-size: 65px; letter-spacing: 2px; }
+          .hero-title { font-size: 32px; }
+          .hero-accent-line { font-size: 20px; }
+          .hero-text { font-size: 16px; padding: 0 10px; }
+          .browse-btn { width: 100%; justify-content: center; max-width: 300px; }
         }
 
         @media (max-width: 480px) {
-          .hero-title-main {
-            font-size: 48px;
-          }
-          
-          .hero-title {
-            font-size: 28px;
-          }
-          
-          .hero-accent-line {
-            font-size: 18px;
-          }
-          
-          .hero-text {
-            font-size: 16px;
-          }
+          .hero-title-main { font-size: 50px; }
+          .hero-title { font-size: 26px; }
+          .hero-accent-line { font-size: 16px; }
+          .hero-badge { font-size: 11px; padding: 6px 16px; }
         }
       `}</style>
 
-      <section className="hero" ref={heroRef}>
-        {/* Carousel Images - using imported images */}
+      <section className={`hero ${isLoaded ? 'is-loaded' : ''}`} ref={heroRef}>
+        {/* Animated Carousel Background */}
         <div className="hero-carousel">
           {carouselImages.map((image, index) => (
             <img
               key={index}
               src={image}
-              alt={`Slide ${index + 1}`}
+              alt={`Premium Product ${index + 1}`}
               className={`carousel-image ${index === currentImageIndex ? 'active' : ''}`}
             />
           ))}
@@ -297,11 +331,12 @@ function HeroSection() {
 
         {/* Hero Content */}
         <div className="hero-container">
+          <div className="hero-badge">
+            Export Quality Worldwide
+          </div>
+
           <div className="hero-title-main">
             ROYAL
-          </div>
-          <div className="hero-badge">
-            EXPORT QUALITY WORLDWIDE
           </div>
 
           <h1 className="hero-title">
@@ -317,11 +352,9 @@ function HeroSection() {
             Serving businesses worldwide with integrity and excellence since 2010.
           </p>
 
-          <div className="hero-buttons">
-            <button className="browse-btn" onClick={() => navigate('/products')}>
-              Browse Products →
-            </button>
-          </div>
+          <button className="browse-btn" onClick={() => navigate('/products')}>
+            Browse Products <span className="btn-arrow">→</span>
+          </button>
         </div>
       </section>
     </>
