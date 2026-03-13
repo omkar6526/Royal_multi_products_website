@@ -197,9 +197,8 @@ function Navbar() {
                     .right-menu {
                         /* Fix 2: Changed from 'fixed' to 'absolute' to prevent backdrop-filter bugs */
                         position: absolute; 
-                        /* Fix 3: Set top to 100% so it perfectly drops down right below the navbar */
                         top: 100%; 
-                        left: ${isMobileMenuOpen ? '0' : '-100%'};
+                        left: ${isMobileMenuOpen ? '0' : '-120%'};
                         width: 100%;
                         height: 100vh;
                         background: white;
