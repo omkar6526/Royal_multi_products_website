@@ -99,7 +99,7 @@ function ReadyToOrder() {
           font-size: 18px;
           line-height: 1.8;
           margin: 30px 0;
-          color: #1a1111;
+          color: #090505;
           font-family: var(--font-body);
         }
 

@@ -1,24 +1,25 @@
 // ProductDetails.jsx
 import React, { useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { 
+import {
   getProductById,
   getRelatedProducts,
-  products 
+  products,
 } from "../data/productData";
 
 // Import all images for related products
-import bathsoap from '../assets/bathsoap.jpeg';
-import greenGrapes from '../assets/greenGrapes.jpeg';
-import hospitalAprons from '../assets/hospitalaprons.jpg';
-import luxuryTowels from '../assets/LuxuryTowels.jpg';
-import tasbih from '../assets/Tasbih.jpeg';
-import ihrambelts from '../assets/ihrambelts.jpeg';
-import redgrapes from '../assets/redgrapes.jpeg';
-import mixgrapes from '../assets/mixgrapes.jpeg';
-import onionpowder from '../assets/OnionPowder.jpeg';
-import onion from '../assets/onions.jpeg';
-import suniform from '../assets/uniform.jpg';
+import bathsoap from "../assets/bathsoap.jpeg";
+import greenGrapes from "../assets/greenGrapes.jpeg";
+import hospitalAprons from "../assets/hospitalaprons.jpg";
+import luxuryTowels from "../assets/LuxuryTowels.jpg";
+import tasbih from "../assets/Tasbih.jpeg";
+import ihrambelts from "../assets/ihrambelts.jpeg";
+import redgrapes from "../assets/redgrapes.jpeg";
+import mixgrapes from "../assets/mixgrapes.jpeg";
+import onionpowder from "../assets/OnionPowder.jpeg";
+import onion from "../assets/onions.jpeg";
+import suniform from "../assets/uniform.jpg";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -42,13 +43,13 @@ function ProductDetails() {
     "350-400",
     "400-450",
     "450-500",
-    "More than 500"
+    "More than 500",
   ];
 
   useEffect(() => {
     setLoading(true);
     setImageLoaded(false);
-    
+
     // Simulate API call
     setTimeout(() => {
       const foundProduct = getProductById(id);
@@ -72,9 +73,9 @@ function ProductDetails() {
   const handleWhatsAppInquiry = () => {
     if (product) {
       const phoneNumber = "919623358693"; // Your WhatsApp number
-      const message = `Hello, I'm interested in ${product.name}${selectedRange ? ` (Quantity: ${selectedRange} units)` : ''}. Please provide more information.`;
+      const message = `Hello, I'm interested in ${product.name}${selectedRange ? ` (Quantity: ${selectedRange} units)` : ""}. Please provide more information.`;
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+      window.open(whatsappUrl, "_blank");
     }
   };
 
@@ -91,13 +92,13 @@ function ProductDetails() {
 
   // Function to get the correct image source
   const getImageSrc = (product) => {
-    if (!product) return '';
-    
+    if (!product) return "";
+
     // If it's a string (URL), return as is
-    if (typeof product.image === 'string') {
+    if (typeof product.image === "string") {
       return product.image;
     }
-    
+
     // If it's an imported image (object), return the src
     return product.image;
   };
@@ -173,8 +174,10 @@ function ProductDetails() {
         <div className="not-found-content">
           <div className="not-found-icon">🔍</div>
           <h2>Product Not Found</h2>
-          <p>The product you're looking for doesn't exist or has been removed.</p>
-          <button onClick={() => navigate('/products')} className="back-btn">
+          <p>
+            The product you're looking for doesn't exist or has been removed.
+          </p>
+          <button onClick={() => navigate("/products")} className="back-btn">
             Browse All Products
           </button>
         </div>
@@ -252,6 +255,7 @@ function ProductDetails() {
             overflow: hidden;
             z-index: 1;
           }
+            
           
           .back-btn::before {
             content: '';
@@ -508,10 +512,10 @@ function ProductDetails() {
           display: inline-block;
           width: fit-content;
         }
-
+        
         .product-description {
           font-size: 18px;
-          color: #4a4a4a;
+          color: #100c0c;
           line-height: 1.8;
           background: #f8f9fa;
           padding: 25px;
@@ -725,7 +729,7 @@ function ProductDetails() {
 
         .tab-content {
           line-height: 1.8;
-          color: #4a4a4a;
+          color: #100a0a;
           font-size: 16px;
           min-height: 200px;
         }
@@ -841,7 +845,7 @@ function ProductDetails() {
 
         .related-title h2 {
           font-size: 36px;
-          color: var(--royal-deep-purple);
+          color: var(black);
           font-weight: 800;
           font-family: var(--font-heading);
           position: relative;
@@ -862,7 +866,7 @@ function ProductDetails() {
         }
 
         .related-title p {
-          color: #666;
+          color: #000000;
           font-size: 16px;
           max-width: 600px;
           margin: 0 auto;
@@ -953,7 +957,7 @@ function ProductDetails() {
 
         .related-info p {
           font-size: 13px;
-          color: #666;
+          color: #190f0f;
           margin-bottom: 15px;
           line-height: 1.6;
         }
@@ -1082,7 +1086,10 @@ function ProductDetails() {
           <div className="breadcrumb">
             <Link to="/">Home</Link> <span>›</span>
             <Link to="/products">Products</Link> <span>›</span>
-            <Link to={`/products?category=${product.categorySlug}`}>{product.category}</Link> <span>›</span>
+            <Link to={`/products?category=${product.categorySlug}`}>
+              {product.category}
+            </Link>{" "}
+            <span>›</span>
             <span className="current">{product.name}</span>
           </div>
 
@@ -1091,20 +1098,24 @@ function ProductDetails() {
             {/* Product Images Gallery */}
             <div className="product-images">
               <div className="main-image-container">
-                <img 
-                  src={product.images && product.images[selectedImage] ? product.images[selectedImage] : product.image} 
+                <img
+                  src={
+                    product.images && product.images[selectedImage]
+                      ? product.images[selectedImage]
+                      : product.image
+                  }
                   alt={product.name}
-                  className={`main-image ${imageLoaded ? 'loaded' : ''}`}
+                  className={`main-image ${imageLoaded ? "loaded" : ""}`}
                   onLoad={() => setImageLoaded(true)}
                 />
               </div>
-              
+
               {product.images && product.images.length > 1 && (
                 <div className="thumbnail-grid">
                   {product.images.map((img, index) => (
-                    <div 
-                      key={index} 
-                      className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
+                    <div
+                      key={index}
+                      className={`thumbnail ${selectedImage === index ? "active" : ""}`}
                       onClick={() => setSelectedImage(index)}
                     >
                       <img src={img} alt={`${product.name} ${index + 1}`} />
@@ -1117,14 +1128,14 @@ function ProductDetails() {
             {/* Product Info */}
             <div className="product-info">
               <span className="product-category">{product.category}</span>
-              
-              <h1>{product.name}</h1>
-              
-              {product.featured && <span className="featured-badge">⭐ Featured</span>}
 
-              <div className="product-description">
-                {product.description}
-              </div>
+              <h1>{product.name}</h1>
+
+              {product.featured && (
+                <span className="featured-badge">⭐ Featured</span>
+              )}
+
+              <div className="product-description">{product.description}</div>
 
               {/* Quantity Selector Section */}
               <div className="quantity-section">
@@ -1134,12 +1145,12 @@ function ProductDetails() {
                 <div className="quantity-selector">
                   <span className="quantity-label">Select Quantity Range:</span>
                   <div className="dropdown-wrapper">
-                    <select 
-                      className="quantity-dropdown" 
-                      value={selectedRange} 
+                    <select
+                      className="quantity-dropdown"
+                      value={selectedRange}
                       onChange={handleRangeChange}
                     >
-                      <option value="">Choose  range</option>
+                      <option value="">Choose range</option>
                       {quantityRanges.map((range) => (
                         <option key={range} value={range}>
                           {range} units
@@ -1155,9 +1166,12 @@ function ProductDetails() {
                 <button className="inquire-now-btn" onClick={handleInquireNow}>
                   <span>📞</span> Inquire Now
                 </button>
-                
-                <button className="whatsapp-btn" onClick={handleWhatsAppInquiry}>
-                  <span>📱</span> WhatsApp
+
+                <button
+                  className="whatsapp-btn"
+                  onClick={handleWhatsAppInquiry}
+                >
+                  <FaWhatsapp size={20} /> WhatsApp
                 </button>
               </div>
             </div>
@@ -1167,36 +1181,38 @@ function ProductDetails() {
           {product.longDescription && (
             <div className="product-tabs">
               <div className="tab-headers">
-                <div 
-                  className={`tab-header ${activeTab === 'description' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('description')}
+                <div
+                  className={`tab-header ${activeTab === "description" ? "active" : ""}`}
+                  onClick={() => setActiveTab("description")}
                 >
                   📋 Full Description
                 </div>
-                <div 
-                  className={`tab-header ${activeTab === 'features' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('features')}
+                <div
+                  className={`tab-header ${activeTab === "features" ? "active" : ""}`}
+                  onClick={() => setActiveTab("features")}
                 >
                   ✨ Key Features
                 </div>
-                <div 
-                  className={`tab-header ${activeTab === 'specifications' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('specifications')}
+                <div
+                  className={`tab-header ${activeTab === "specifications" ? "active" : ""}`}
+                  onClick={() => setActiveTab("specifications")}
                 >
                   📊 Specifications
                 </div>
               </div>
 
               <div className="tab-content">
-                {activeTab === 'description' && (
+                {activeTab === "description" && (
                   <div className="description-content">
-                    {product.longDescription.split('\n\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {product.longDescription
+                      .split("\n\n")
+                      .map((paragraph, idx) => (
+                        <p key={idx}>{paragraph}</p>
+                      ))}
                   </div>
                 )}
-                
-                {activeTab === 'features' && (
+
+                {activeTab === "features" && (
                   <ul className="features-list">
                     <li>Premium export quality certified</li>
                     <li>Eco-friendly and sustainable packaging</li>
@@ -1206,8 +1222,8 @@ function ProductDetails() {
                     <li>Quality guarantee on all products</li>
                   </ul>
                 )}
-                
-                {activeTab === 'specifications' && (
+
+                {activeTab === "specifications" && (
                   <div className="specs-grid">
                     <div className="spec-item">
                       <span className="spec-label">Category</span>
@@ -1239,22 +1255,25 @@ function ProductDetails() {
                 <p>Discover more products from our premium collection</p>
               </div>
               <div className="related-grid">
-                {relatedProducts.map(relatedProduct => (
-                  <div 
-                    key={relatedProduct.id} 
+                {relatedProducts.map((relatedProduct) => (
+                  <div
+                    key={relatedProduct.id}
                     className="related-card"
                     onClick={() => handleRelatedProductClick(relatedProduct.id)}
                   >
                     <div className="related-image">
-                      <img src={getImageSrc(relatedProduct)} alt={relatedProduct.name} />
+                      <img
+                        src={getImageSrc(relatedProduct)}
+                        alt={relatedProduct.name}
+                      />
                     </div>
                     <div className="related-info">
-                      <span className="related-category">{relatedProduct.category}</span>
+                      <span className="related-category">
+                        {relatedProduct.category}
+                      </span>
                       <h3>{relatedProduct.name}</h3>
                       <p>{relatedProduct.description.substring(0, 60)}...</p>
-                      <span className="view-details-link">
-                        View Details →
-                      </span>
+                      <span className="view-details-link">View Details →</span>
                     </div>
                   </div>
                 ))}
