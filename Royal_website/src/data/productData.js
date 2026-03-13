@@ -436,7 +436,7 @@ Environmentally responsible packaging:
 
 Our natural soaps are more than just cleansers; they're a return to traditional skincare wisdom, crafted with intention and respect for both your skin and the planet.`,
     bgColor: "#e8f0e8",
-    featured: true
+    featured: false
   },
   {
     id: 5,
@@ -720,7 +720,7 @@ To maximize shelf life and potency:
 
 Each jar in our Premium Spice Collection contains the essence of India's rich culinary heritage, carefully preserved and packaged to bring authentic flavors to your kitchen.`,
     bgColor: "#e0f0fa",
-    featured: true
+    featured: false
   },
   {
     id: 7,
@@ -1565,7 +1565,7 @@ Special arrangements for travel groups:
 
 Our Ihram belts combine the spiritual requirements of pilgrimage with modern practical needs, allowing pilgrims to focus on their worship while their valuables remain secure and accessible.`,
     bgColor: "#f5e6d3",
-    featured: true
+    featured: false
   },
   {
   id: 13,

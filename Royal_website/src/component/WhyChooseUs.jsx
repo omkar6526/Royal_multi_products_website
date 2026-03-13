@@ -49,7 +49,7 @@ function WhyChooseUs() {
       <style>{`
         .why-choose-section {
           padding: 100px 0;
-          background: linear-gradient(135deg, #0a3d2e, #0d5c42, #0a4a35);
+          background: linear-gradient(135deg, #002144, #005cbd, #000b4b);
           position: relative;
           overflow: hidden;
         }
@@ -110,7 +110,7 @@ function WhyChooseUs() {
           transform: translateX(-50%);
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #9ddd8f, #c2f4e1);
+          background: linear-gradient(90deg, #bccf0e, #c2f4e1);
           border-radius: 2px;
         }
 
@@ -168,7 +168,7 @@ function WhyChooseUs() {
 
         .feature-card:hover {
           transform: translateY(-10px) scale(1.02);
-          border-color: #9ddd8f;
+          border-color: #c0de00;
           box-shadow: 0 25px 50px rgba(0,0,0,0.45), 0 0 20px rgba(157, 221, 143, 0.2);
         }
 
@@ -181,7 +181,7 @@ function WhyChooseUs() {
           align-items: center;
           justify-content: center;
           margin: 0 auto 25px;
-          color: #0a5c42;
+          color: #001964;
           transition: all 0.5s ease;
           position: relative;
           z-index: 1;
@@ -195,7 +195,7 @@ function WhyChooseUs() {
           left: -2px;
           right: -2px;
           bottom: -2px;
-          background: linear-gradient(135deg, #9ddd8f, #0a3d2e);
+          background: linear-gradient(135deg, #f5c800, #794b00);
           border-radius: 50%;
           z-index: -1;
           opacity: 0;

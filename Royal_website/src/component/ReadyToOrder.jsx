@@ -110,7 +110,7 @@ function ReadyToOrder() {
         }
 
         .quote-btn {
-          background: linear-gradient(135deg, var(--royal-gold), var(--royal-burgundy));
+          background:#bcad2c ;
           color: white;
           border: none;
           padding: 16px 35px;
@@ -180,7 +180,7 @@ function ReadyToOrder() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, var(--royal-gold), var(--royal-burgundy));
+          background:#bcad2c;
           transition: left 0.3s;
           z-index: -1;
         }
@@ -254,7 +254,7 @@ function ReadyToOrder() {
           color: var(--royal-gold);
           font-size: 24px;
           min-width: 32px;
-          filter: drop-shadow(0 2px 5px rgba(212, 175, 55, 0.3));
+          filter: drop-shadow(0 2px 5px rgba(226, 176, 12, 0.3));
         }
 
         .feature-text {
